@@ -1,69 +1,115 @@
-import Image from "next/image";
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import { templates } from "@/config/templates";
+import Header from "@/components/Header";
 
 export default function Home() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const nextTemplate = () => {
+    setCurrentIndex((prev) => (prev + 1) % templates.length);
+  };
+
+  const prevTemplate = () => {
+    setCurrentIndex((prev) => (prev - 1 + templates.length) % templates.length);
+  };
+
+  const current = templates[currentIndex];
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <main className="min-h-screen bg-neutral-950 text-white flex flex-col overflow-hidden">
+      <Header />
+
+      {/* Ambient Background Glow */}
+      <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-indigo-500/10 blur-[120px]" />
+        <div className="absolute top-[20%] -right-[10%] w-[40%] h-[40%] rounded-full bg-purple-500/10 blur-[120px]" />
+      </div>
+
+      <div className="relative z-10 flex-1 flex flex-col justify-center max-w-7xl mx-auto w-full px-6 pt-24 pb-12">
+        
+        {/* Main Carousel Area */}
+        <div className="relative flex items-center justify-between gap-8 h-[500px]">
+          
+          {/* Left Button */}
+          <button 
+            onClick={prevTemplate}
+            className="hidden md:flex shrink-0 w-14 h-14 items-center justify-center rounded-full bg-neutral-900/50 border border-neutral-800 hover:bg-neutral-800 hover:border-neutral-700 transition-all backdrop-blur-sm text-2xl"
+            aria-label="Previous template"
           >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            ←
+          </button>
+
+          {/* The Active Template Preview */}
+          <div className="flex-1 h-full flex flex-col md:flex-row gap-8 items-center">
+            
+            {/* Visual Preview Box */}
+            <div className={`flex-1 w-full h-full rounded-3xl border border-neutral-800 shadow-2xl transition-colors duration-500 flex items-center justify-center ${current.previewColor}`}>
+              <span className="text-neutral-500 font-medium tracking-widest uppercase text-sm">
+                {current.name} UI Preview
+              </span>
+            </div>
+
+            {/* Info & Actions */}
+            <div className="flex-1 w-full md:max-w-md flex flex-col">
+              <div className="flex gap-2 mb-6">
+                {current.tags.map(tag => (
+                  <span key={tag} className="px-3 py-1 text-xs font-medium bg-neutral-900 border border-neutral-800 text-neutral-300 rounded-full">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <h1 className="text-4xl md:text-5xl font-bold mb-4">{current.name}</h1>
+              <p className="text-neutral-400 text-lg mb-8 leading-relaxed">
+                {current.description}
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 mt-auto">
+                <Link 
+                  href={`/login/${current.id}`}
+                  className="flex-1 text-center bg-white text-black font-semibold py-3 rounded-xl hover:bg-neutral-200 transition-colors shadow-lg shadow-white/10"
+                >
+                  View Login
+                </Link>
+                <Link 
+                  href={`/signup/${current.id}`}
+                  className="flex-1 text-center bg-neutral-900 border border-neutral-800 text-white font-semibold py-3 rounded-xl hover:bg-neutral-800 transition-colors"
+                >
+                  View Sign Up
+                </Link>
+              </div>
+
+              {/* Progress Indicator */}
+              <div className="flex gap-2 mt-8">
+                {templates.map((_, idx) => (
+                  <div 
+                    key={idx} 
+                    className={`h-1.5 rounded-full transition-all duration-300 ${idx === currentIndex ? 'w-8 bg-indigo-500' : 'w-2 bg-neutral-800'}`}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Right Button */}
+          <button 
+            onClick={nextTemplate}
+            className="hidden md:flex shrink-0 w-14 h-14 items-center justify-center rounded-full bg-neutral-900/50 border border-neutral-800 hover:bg-neutral-800 hover:border-neutral-700 transition-all backdrop-blur-sm text-2xl"
+            aria-label="Next template"
           >
-            Documentation
-          </a>
+            →
+          </button>
         </div>
-      </main>
-    </div>
+
+        {/* Mobile Arrows */}
+        <div className="flex md:hidden justify-center gap-6 mt-8">
+            <button onClick={prevTemplate} className="w-12 h-12 rounded-full bg-neutral-900 border border-neutral-800 flex items-center justify-center">←</button>
+            <button onClick={nextTemplate} className="w-12 h-12 rounded-full bg-neutral-900 border border-neutral-800 flex items-center justify-center">→</button>
+        </div>
+
+      </div>
+    </main>
   );
 }
