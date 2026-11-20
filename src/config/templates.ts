@@ -47,5 +47,12 @@ export const templates = [
     description: 'Playful pastel colors mixed with heavy, chunky black borders.',
     tags: ['Retro', 'Playful', 'Bold'],
     previewColor: 'bg-[#f4d0d0]',
+  },
+  {
+    id: 'template-8',
+    name: 'Skeuomorphism',
+    description: 'Realistic, tactile UI elements with gradients and deep shadows.',
+    tags: ['3D', 'Classic', 'Realistic'],
+    previewColor: 'bg-gradient-to-b from-[#4a5568] to-[#2d3748]',
   }
 ];

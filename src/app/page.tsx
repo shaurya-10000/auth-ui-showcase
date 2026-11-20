@@ -12,6 +12,7 @@ import { Login as Template4Login } from "@/templates/template-4";
 import { Login as Template5Login } from "@/templates/template-5";
 import { Login as Template6Login } from "@/templates/template-6";
 import { Login as Template7Login } from "@/templates/template-7";
+import { Login as Template8Login } from "@/templates/template-8";
 
 const previewComponents = {
   'template-1': Template1Login,
@@ -21,6 +22,7 @@ const previewComponents = {
   'template-5': Template5Login,
   'template-6': Template6Login,
   'template-7': Template7Login,
+  'template-8': Template8Login,
 };
 
 export default function Home() {
