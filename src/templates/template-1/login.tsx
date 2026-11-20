@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Image from 'next/image';
 import Link from "next/link";
 import { Eye, EyeOff, ArrowRight } from "lucide-react";
 
@@ -134,9 +135,9 @@ export default function Login() {
             </p>
             <div className="mt-12 flex items-center gap-4">
               <div className="flex -space-x-4">
-                <img className="h-10 w-10 rounded-full border-2 border-slate-900 object-cover" src="https://i.pravatar.cc/100?img=1" alt="" />
-                <img className="h-10 w-10 rounded-full border-2 border-slate-900 object-cover" src="https://i.pravatar.cc/100?img=2" alt="" />
-                <img className="h-10 w-10 rounded-full border-2 border-slate-900 object-cover" src="https://i.pravatar.cc/100?img=3" alt="" />
+                <Image className="h-10 w-10 rounded-full border-2 border-slate-900 object-cover" src="https://i.pravatar.cc/100?img=1" alt="Avatar 1" width={40} height={40} />
+                <Image className="h-10 w-10 rounded-full border-2 border-slate-900 object-cover" src="https://i.pravatar.cc/100?img=2" alt="Avatar 2" width={40} height={40} />
+                <Image className="h-10 w-10 rounded-full border-2 border-slate-900 object-cover" src="https://i.pravatar.cc/100?img=3" alt="Avatar 3" width={40} height={40} />
               </div>
               <p className="text-sm font-medium text-slate-300">Trusted by 10,000+ users</p>
             </div>
