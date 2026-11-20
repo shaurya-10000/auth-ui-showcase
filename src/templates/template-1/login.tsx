@@ -21,7 +21,7 @@ export default function Login() {
           <div className="mb-10">
             <h2 className="text-3xl font-bold tracking-tight text-slate-900">Welcome back</h2>
             <p className="mt-2 text-sm text-slate-500">
-              Don't have an account?{" "}
+              Don&apos;t have an account?{" "}
               <Link href="/signup/template-1" className="font-semibold text-indigo-600 hover:text-indigo-500 transition-colors">
                 Sign up
               </Link>
