@@ -1,41 +1,56 @@
-<<<<<<< HEAD
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Auth UI Showcase
 
-## Getting Started
+A curated gallery of distinct, fully responsive login and signup UI templates. Built to showcase modern frontend architecture, accessible design, and interactive states.
 
-First, run the development server:
+## 🚀 Live Demo
+[https://auth-ui-showcase-rho.vercel.app](https://auth-ui-showcase-rho.vercel.app)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## ✨ Features
+- **Multiple Templates:** A variety of distinct authentication designs (Minimal, Glassmorphism, Neo-Brutalist, etc.).
+- **Interactive Gallery:** A carousel and grid view to browse all available templates.
+- **Real Interactions:** Fully functional UI states including form validation, password strength meters, loading states, and success/error handling.
+- **Accessibility First:** Keyboard navigation, ARIA labels, and proper focus states.
+- **Modern Stack:** Built with Next.js (App Router), React, TypeScript, and Tailwind CSS.
+
+## 🛠️ Tech Stack
+- **Framework:** [Next.js](https://nextjs.org/)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **CI/CD:** GitHub Actions (Linting & Build checking)
+- **Deployment:** Vercel
+
+## 📂 Project Structure
+```text
+src/
+├── app/               # Next.js App Router pages and layouts
+├── components/        # Shared UI components (Buttons, Inputs, etc.)
+├── templates/         # Self-contained template folders
+│   ├── minimal/       # Each folder contains its own Login, Signup, and styles
+│   ├── glassmorphism/
+│   └── neo-brutalist/
+└── config/            # Template registry for the gallery
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🏃‍♂️ Getting Started
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/shaurya-10000/auth-ui-showcase.git
+   ```
+2. **Navigate to the directory:**
+   ```bash
+   cd auth-ui-showcase
+   ```
+3. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+4. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
+5. **Open your browser:**
+   Navigate to [http://localhost:3000](http://localhost:3000) to see the gallery.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-=======
-# auth-ui-showcase
-A curated gallery of distinct, fully responsive login and signup UI templates. Built to showcase modern frontend architecture, accessible design, and interactive states.
->>>>>>> b690b4109085dab30898e9807494bc30f24d9753
+## 📝 License
+This project is licensed under the MIT License.
