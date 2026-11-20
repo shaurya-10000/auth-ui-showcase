@@ -33,5 +33,12 @@ export const templates = [
     description: 'Soft, extruded UI elements with subtle shadows and a clean, tactile feel.',
     tags: ['Soft UI', 'Light Mode', 'Tactile'],
     previewColor: 'bg-[#e0e5ec]',
+  },
+  {
+    id: 'template-6',
+    name: 'Bento Grid',
+    description: 'A modern, card-based layout with large rounded corners and a clean aesthetic.',
+    tags: ['Modern', 'Card UI', 'Minimal'],
+    previewColor: 'bg-[#f5f5f7]',
   }
 ];
