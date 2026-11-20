@@ -14,7 +14,7 @@ export default function Signup() {
   };
 
   return (
-    <div className="min-h-screen flex bg-white font-sans text-slate-900">
+    <main className="min-h-screen flex bg-white font-sans text-slate-900">
       {/* Left Side - Form */}
       <div className="flex-1 flex flex-col justify-center px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24 w-full lg:w-1/2">
         <div className="mx-auto w-full max-w-sm lg:w-96">
@@ -22,7 +22,7 @@ export default function Signup() {
             <h2 className="text-3xl font-bold tracking-tight text-slate-900">Create an account</h2>
             <p className="mt-2 text-sm text-slate-500">
               Already have an account?{" "}
-              <Link href="/login/template-1" className="font-semibold text-indigo-600 hover:text-indigo-500 transition-colors">
+              <Link href="/login/template-1" className="inline-block py-2 font-semibold text-indigo-600 hover:text-indigo-500 transition-colors">
                 Sign in
               </Link>
             </p>
@@ -30,38 +30,36 @@ export default function Signup() {
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div className="relative">
-              <input type="text" id="name" required className="peer block w-full appearance-none rounded-lg border border-slate-300 px-3 pt-5 pb-2 text-slate-900 focus:border-indigo-600 focus:outline-none focus:ring-0 bg-transparent" placeholder=" " />
-              <label htmlFor="name" className="absolute left-3 top-4 z-10 origin-[0] -translate-y-3 scale-75 transform text-sm text-slate-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-3 peer-focus:scale-75 peer-focus:text-indigo-600 font-medium">Full Name</label>
+              <input type="text" id="name" aria-label="Full Name" required className="peer block w-full appearance-none rounded-lg border border-slate-300 px-3 pt-5 pb-2 text-slate-900 focus:border-indigo-600 focus:outline-none focus:ring-0 bg-transparent" placeholder=" " />
+              <span aria-hidden="true" className="pointer-events-none absolute left-3 top-4 z-10 origin-[0] -translate-y-3 scale-75 transform text-sm text-slate-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-3 peer-focus:scale-75 peer-focus:text-indigo-600 font-medium">Full Name</span>
             </div>
 
             <div className="relative">
-              <input type="email" id="email" required className="peer block w-full appearance-none rounded-lg border border-slate-300 px-3 pt-5 pb-2 text-slate-900 focus:border-indigo-600 focus:outline-none focus:ring-0 bg-transparent" placeholder=" " />
-              <label htmlFor="email" className="absolute left-3 top-4 z-10 origin-[0] -translate-y-3 scale-75 transform text-sm text-slate-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-3 peer-focus:scale-75 peer-focus:text-indigo-600 font-medium">Email address</label>
+              <input type="email" id="email" aria-label="Email address" required className="peer block w-full appearance-none rounded-lg border border-slate-300 px-3 pt-5 pb-2 text-slate-900 focus:border-indigo-600 focus:outline-none focus:ring-0 bg-transparent" placeholder=" " />
+              <span aria-hidden="true" className="pointer-events-none absolute left-3 top-4 z-10 origin-[0] -translate-y-3 scale-75 transform text-sm text-slate-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-3 peer-focus:scale-75 peer-focus:text-indigo-600 font-medium">Email address</span>
             </div>
 
-            <div className="relative">
-              <input type={showPassword ? "text" : "password"} id="password" required className="peer block w-full appearance-none rounded-lg border border-slate-300 px-3 pt-5 pb-2 pr-10 text-slate-900 focus:border-indigo-600 focus:outline-none focus:ring-0 bg-transparent" placeholder=" " />
-              <label htmlFor="password" className="absolute left-3 top-4 z-10 origin-[0] -translate-y-3 scale-75 transform text-sm text-slate-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-3 peer-focus:scale-75 peer-focus:text-indigo-600 font-medium">Password</label>
-              <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-3 text-slate-400 hover:text-slate-600 transition-colors focus:outline-none">
-                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
-              </button>
+            <div className="relative flex items-stretch rounded-lg border border-slate-300 focus-within:border-indigo-600">
+              <input type={showPassword ? "text" : "password"} id="password" aria-label="Password" required className="peer block w-full appearance-none min-w-0 rounded-l-lg px-3 pt-5 pb-2 text-slate-900 focus:outline-none focus:ring-0 bg-transparent" placeholder=" " />
+              <span aria-hidden="true" className="pointer-events-none absolute left-3 top-4 z-10 origin-[0] -translate-y-3 scale-75 transform text-sm text-slate-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-3 peer-focus:scale-75 peer-focus:text-indigo-600 font-medium">Password</span>
+              <button type="button" onClick={() => setShowPassword(!showPassword)} aria-label={showPassword ? "Hide password" : "Show password"} aria-pressed={showPassword} className="flex w-12 shrink-0 items-center justify-center rounded-r-lg text-slate-500 hover:text-slate-700 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-indigo-600">{showPassword ? <EyeOff size={20} aria-hidden="true" /> : <Eye size={20} aria-hidden="true" />}</button>
             </div>
 
             <div className="flex items-start">
               <div className="flex h-6 items-center">
-                <input id="terms" name="terms" type="checkbox" required className="h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-600" />
+                <input id="terms" name="terms" type="checkbox" required className="h-6 w-6 rounded border-slate-300 text-indigo-600 focus:ring-indigo-600" />
               </div>
               <div className="ml-3 text-sm leading-6">
                 <label htmlFor="terms" className="font-medium text-slate-600">
-                  I agree to the <a href="#" className="text-indigo-600 hover:text-indigo-500">Terms</a> and <a href="#" className="text-indigo-600 hover:text-indigo-500">Privacy Policy</a>
+                  I agree to the <a href="#" className="inline-block py-1 text-indigo-600 hover:text-indigo-500">Terms</a> and <a href="#" className="inline-block py-1 text-indigo-600 hover:text-indigo-500">Privacy Policy</a>
                 </label>
               </div>
             </div>
 
-            <button type="submit" disabled={isLoading} className="group relative flex w-full justify-center rounded-lg bg-indigo-600 px-3 py-2.5 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition-all disabled:opacity-70 disabled:cursor-not-allowed mt-2">
+            <button type="submit" disabled={isLoading} className="group relative flex w-full justify-center rounded-lg bg-indigo-600 px-3 py-3.5 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transition-all disabled:opacity-70 disabled:cursor-not-allowed mt-2">
               {isLoading ? (
                 <span className="flex items-center gap-2">
-                  <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                  <span className="block h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
                   Creating account...
                 </span>
               ) : (
@@ -89,6 +87,6 @@ export default function Signup() {
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
