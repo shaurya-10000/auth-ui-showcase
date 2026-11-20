@@ -26,5 +26,12 @@ export const templates = [
     description: 'A raw, neon-accented terminal interface for the modern hacker.',
     tags: ['Cyberpunk', 'Terminal', 'Dark Mode'],
     previewColor: 'bg-black',
+  },
+  {
+    id: 'template-5',
+    name: 'Neumorphism',
+    description: 'Soft, extruded UI elements with subtle shadows and a clean, tactile feel.',
+    tags: ['Soft UI', 'Light Mode', 'Tactile'],
+    previewColor: 'bg-[#e0e5ec]',
   }
 ];
