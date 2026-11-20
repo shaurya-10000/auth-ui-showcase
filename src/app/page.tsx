@@ -8,11 +8,13 @@ import Header from "@/components/Header";
 import { Login as Template1Login } from "@/templates/template-1";
 import { Login as Template2Login } from "@/templates/template-2";
 import { Login as Template3Login } from "@/templates/template-3";
+import { Login as Template4Login } from "@/templates/template-4";
 
 const previewComponents = {
   'template-1': Template1Login,
   'template-2': Template2Login,
   'template-3': Template3Login,
+  'template-4': Template4Login,
 };
 
 export default function Home() {

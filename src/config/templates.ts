@@ -19,5 +19,12 @@ export const templates = [
     description: 'High contrast, thick borders, and aggressive layouts for a bold impression.',
     tags: ['Bold', 'High Contrast', 'Experimental'],
     previewColor: 'bg-yellow-400',
+  },
+  {
+    id: 'template-4',
+    name: 'Cyberpunk Terminal',
+    description: 'A raw, neon-accented terminal interface for the modern hacker.',
+    tags: ['Cyberpunk', 'Terminal', 'Dark Mode'],
+    previewColor: 'bg-black',
   }
 ];
