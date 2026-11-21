@@ -26,7 +26,6 @@ const previewMap = {
   'template-8': T8,
 };
 
-// A sub-component to handle individual card scaling
 function GridCard({ template }: { template: { id: string; name: string; description: string; tags: string[] } }) {
   const [scale, setScale] = useState(0.3);
   const boxRef = useRef<HTMLDivElement>(null);
@@ -45,7 +44,6 @@ function GridCard({ template }: { template: { id: string; name: string; descript
   return (
     <div className="flex flex-col bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden group">
       
-      {/* Visual Preview Box - Dynamic Scaling */}
       <div 
         ref={boxRef}
         className="relative w-full aspect-video bg-[#0a0a0a] overflow-hidden border-b border-neutral-800"
@@ -59,10 +57,8 @@ function GridCard({ template }: { template: { id: string; name: string; descript
           </div>
         </div>
 
-        {/* Bottom Gradient Fade */}
         <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-neutral-900 to-transparent z-10" />
         
-        {/* Hover Overlay */}
         <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-20">
           <Link 
             href={`/login/${template.id}`}
@@ -73,8 +69,7 @@ function GridCard({ template }: { template: { id: string; name: string; descript
         </div>
       </div>
 
-      {/* Content */}
-      <div className="p-6 flex flex-col flex-1">
+      <div className="p-4 sm:p-6 flex flex-col flex-1">
         <div className="flex flex-wrap gap-2 mb-4">
           {template.tags.map((tag: string) => (
             <span key={tag} className="px-2.5 py-1 text-xs font-medium bg-neutral-800 text-neutral-300 rounded-md">
@@ -82,10 +77,9 @@ function GridCard({ template }: { template: { id: string; name: string; descript
             </span>
           ))}
         </div>
-        <h3 className="text-xl font-bold mb-2">{template.name}</h3>
+        <h3 className="text-lg sm:text-xl font-bold mb-2">{template.name}</h3>
         <p className="text-neutral-400 text-sm mb-6 flex-1">{template.description}</p>
         
-        {/* Actions */}
         <div className="flex items-center gap-3">
           <Link href={`/login/${template.id}`} className="flex-1 text-center bg-white text-black text-sm font-semibold py-2.5 rounded-lg hover:bg-neutral-200 transition-colors">
             Preview
@@ -104,13 +98,13 @@ export default function GridView() {
     <main className="min-h-screen bg-neutral-950 text-white flex flex-col">
       <Header />
 
-      <div className="flex-1 max-w-7xl mx-auto w-full px-6 py-24">
-        <div className="mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">All Templates</h1>
-          <p className="text-neutral-400 text-lg">Browse, preview, and download the raw React code for every design.</p>
+      <div className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 py-24">
+        <div className="mb-8 sm:mb-12">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-4">All Templates</h1>
+          <p className="text-neutral-400 text-base sm:text-lg">Browse, preview, and download the raw React code for every design.</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {templates.map((template) => (
             <GridCard key={template.id} template={template} />
           ))}
