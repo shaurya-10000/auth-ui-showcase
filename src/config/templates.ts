@@ -61,5 +61,12 @@ export const templates = [
     description: 'Refined magazine-inspired typography with warm paper tones and subtle hairlines.',
     tags: ['Editorial', 'Serif', 'Minimal'],
     previewColor: 'bg-[#faf8f5]',
+  },
+  {
+    id: 'template-10',
+    name: 'Aurora Mesh',
+    description: 'Luminous multi-hue mesh gradients paired with translucent surfaces and crisp contrast.',
+    tags: ['Gradient', 'Mesh', 'Modern'],
+    previewColor: 'bg-[#070812]',
   }
 ];
