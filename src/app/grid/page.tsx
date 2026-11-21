@@ -1,0 +1,121 @@
+"use client";
+
+import { useState, useRef, useEffect } from "react";
+import Link from "next/link";
+import { templates } from "@/config/templates";
+import Header from "@/components/Header";
+import { Download } from "lucide-react";
+
+import { Login as T1 } from "@/templates/template-1";
+import { Login as T2 } from "@/templates/template-2";
+import { Login as T3 } from "@/templates/template-3";
+import { Login as T4 } from "@/templates/template-4";
+import { Login as T5 } from "@/templates/template-5";
+import { Login as T6 } from "@/templates/template-6";
+import { Login as T7 } from "@/templates/template-7";
+import { Login as T8 } from "@/templates/template-8";
+
+const previewMap = {
+  'template-1': T1,
+  'template-2': T2,
+  'template-3': T3,
+  'template-4': T4,
+  'template-5': T5,
+  'template-6': T6,
+  'template-7': T7,
+  'template-8': T8,
+};
+
+// A sub-component to handle individual card scaling
+function GridCard({ template }: { template: { id: string; name: string; description: string; tags: string[] } }) {
+  const [scale, setScale] = useState(0.3);
+  const boxRef = useRef<HTMLDivElement>(null);
+  const PreviewComponent = previewMap[template.id as keyof typeof previewMap];
+
+  useEffect(() => {
+    const el = boxRef.current;
+    if (!el) return;
+    const update = () => setScale(el.clientWidth / 1440);
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  return (
+    <div className="flex flex-col bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden group">
+      
+      {/* Visual Preview Box - Dynamic Scaling */}
+      <div 
+        ref={boxRef}
+        className="relative w-full aspect-video bg-[#0a0a0a] overflow-hidden border-b border-neutral-800"
+      >
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div 
+            className="absolute top-0 left-0 w-[1440px] h-[810px] bg-[#0a0a0a]"
+            style={{ transform: `scale(${scale})`, transformOrigin: "top left" }}
+          >
+            <PreviewComponent />
+          </div>
+        </div>
+
+        {/* Bottom Gradient Fade */}
+        <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-neutral-900 to-transparent z-10" />
+        
+        {/* Hover Overlay */}
+        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-20">
+          <Link 
+            href={`/login/${template.id}`}
+            className="bg-white text-black font-semibold py-2.5 px-5 rounded-lg shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 text-sm"
+          >
+            Open Preview
+          </Link>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="p-6 flex flex-col flex-1">
+        <div className="flex flex-wrap gap-2 mb-4">
+          {template.tags.map((tag: string) => (
+            <span key={tag} className="px-2.5 py-1 text-xs font-medium bg-neutral-800 text-neutral-300 rounded-md">
+              {tag}
+            </span>
+          ))}
+        </div>
+        <h3 className="text-xl font-bold mb-2">{template.name}</h3>
+        <p className="text-neutral-400 text-sm mb-6 flex-1">{template.description}</p>
+        
+        {/* Actions */}
+        <div className="flex items-center gap-3">
+          <Link href={`/login/${template.id}`} className="flex-1 text-center bg-white text-black text-sm font-semibold py-2.5 rounded-lg hover:bg-neutral-200 transition-colors">
+            Preview
+          </Link>
+          <a href={`/api/download/${template.id}`} download className="flex items-center justify-center gap-2 flex-1 bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold py-2.5 rounded-lg transition-colors">
+            <Download size={16} /> Code
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function GridView() {
+  return (
+    <main className="min-h-screen bg-neutral-950 text-white flex flex-col">
+      <Header />
+
+      <div className="flex-1 max-w-7xl mx-auto w-full px-6 py-24">
+        <div className="mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">All Templates</h1>
+          <p className="text-neutral-400 text-lg">Browse, preview, and download the raw React code for every design.</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {templates.map((template) => (
+            <GridCard key={template.id} template={template} />
+          ))}
+        </div>
+      </div>
+    </main>
+  );
+}
