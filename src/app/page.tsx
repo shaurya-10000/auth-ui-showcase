@@ -63,7 +63,7 @@ export default function Home() {
   const PreviewComponent = previewComponents[current.id as keyof typeof previewComponents];
 
   return (
-    <main className="h-screen bg-neutral-950 text-white flex flex-col relative overflow-hidden">
+    <main className="min-h-screen lg:h-screen bg-neutral-950 text-white flex flex-col relative overflow-x-hidden lg:overflow-hidden pt-16">
       <Header />
 
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none mt-16">
@@ -72,13 +72,11 @@ export default function Home() {
       </div>
 
       <div
-        className="relative z-10 flex-1 min-h-0 flex items-center max-w-[90rem] mx-auto w-full px-12 sm:px-20 lg:px-0 py-4"
+        className="relative z-10 flex-1 min-h-0 flex items-center max-w-[90rem] mx-auto w-full px-4 sm:px-8 lg:px-6 py-6 lg:py-4"
         style={{ touchAction: "pan-y" }}
         {...swipeHandlers}
       >
-
-        <div className="flex items-center justify-between gap-6 w-full h-full max-h-[600px]">
-
+        <div className="flex items-center justify-between gap-6 w-full lg:h-full lg:max-h-[600px]">
           {/* Desktop Previous Arrow - centered vertically, outside the preview */}
           <button
             onClick={prevTemplate}
@@ -88,14 +86,12 @@ export default function Home() {
             <ChevronLeft size={28} />
           </button>
 
-          <div className="flex-1 min-w-0 h-full flex flex-col items-center justify-center">
-
-            <div className="w-full flex flex-col lg:flex-row gap-8 lg:gap-16 items-center">
-
+          <div className="flex-1 min-w-0 lg:h-full flex flex-col items-center justify-center">
+            <div className="w-full flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-16 items-center">
               {/* Live Scaled Preview Box */}
               <div
                 ref={boxRef}
-                className="group relative w-full flex-1 aspect-video max-h-[60vh] rounded-2xl border border-white/10 shadow-2xl overflow-hidden bg-[#0a0a0a] ring-1 ring-white/5"
+                className="group relative w-full lg:flex-1 aspect-video max-h-[42vh] sm:max-h-[50vh] lg:max-h-[60vh] rounded-2xl border border-white/10 shadow-2xl overflow-hidden bg-[#0a0a0a] ring-1 ring-white/5"
               >
                 <div className="absolute inset-0 pointer-events-none overflow-hidden">
                   <div
@@ -120,36 +116,36 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="flex-1 w-full lg:max-w-md flex flex-col justify-center">
-                <div className="flex gap-2 mb-4">
+              <div className="w-full lg:flex-1 lg:max-w-md flex flex-col justify-center">
+                <div className="flex flex-wrap gap-2 mb-3 sm:mb-4">
                   {current.tags.map(tag => (
                     <span key={tag} className="px-3 py-1 text-xs font-medium bg-neutral-900 border border-neutral-800 text-neutral-300 rounded-full">
                       {tag}
                     </span>
                   ))}
                 </div>
-                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3">{current.name}</h1>
-                <p className="text-neutral-400 text-base sm:text-lg mb-6 leading-relaxed">
+                <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-2 sm:mb-3">{current.name}</h1>
+                <p className="text-neutral-400 text-sm sm:text-lg mb-5 sm:mb-6 leading-relaxed">
                   {current.description}
                 </p>
 
-                <div className="flex flex-col sm:flex-row gap-3 mt-auto">
+                <div className="grid grid-cols-2 sm:flex sm:flex-row gap-2.5 sm:gap-3 mt-auto">
                   <Link
                     href={`/login/${current.id}`}
-                    className="flex-1 text-center bg-white text-black font-semibold py-3 rounded-xl hover:bg-neutral-200 transition-colors shadow-lg shadow-white/10"
+                    className="flex-1 text-center bg-white text-black text-sm sm:text-base font-semibold py-2.5 sm:py-3 rounded-xl hover:bg-neutral-200 transition-colors shadow-lg shadow-white/10"
                   >
                     View Login
                   </Link>
                   <Link
                     href={`/signup/${current.id}`}
-                    className="flex-1 text-center bg-neutral-900 border border-neutral-800 text-white font-semibold py-3 rounded-xl hover:bg-neutral-800 transition-colors"
+                    className="flex-1 text-center bg-neutral-900 border border-neutral-800 text-white text-sm sm:text-base font-semibold py-2.5 sm:py-3 rounded-xl hover:bg-neutral-800 transition-colors"
                   >
                     View Sign Up
                   </Link>
                   <a
                     href={`/api/download/${current.id}`}
                     download
-                    className="flex-1 text-center bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3 rounded-xl transition-colors shadow-lg shadow-indigo-500/20 flex items-center justify-center gap-2"
+                    className="col-span-2 sm:flex-1 text-center bg-indigo-600 hover:bg-indigo-500 text-white text-sm sm:text-base font-semibold py-2.5 sm:py-3 rounded-xl transition-colors shadow-lg shadow-indigo-500/20 flex items-center justify-center gap-2"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                     Code
@@ -160,31 +156,39 @@ export default function Home() {
                   type="button"
                   onClick={() => setIsCodeOpen(true)}
                   aria-haspopup="dialog"
-                  className="mt-3 w-full flex items-center justify-center gap-2 bg-neutral-900 border border-neutral-800 text-white font-semibold py-3 rounded-xl hover:bg-neutral-800 transition-colors"
+                  className="mt-2.5 sm:mt-3 w-full flex items-center justify-center gap-2 bg-neutral-900 border border-neutral-800 text-white text-sm sm:text-base font-semibold py-2.5 sm:py-3 rounded-xl hover:bg-neutral-800 transition-colors"
                 >
                   <CodeIcon size={18} />
                   View Code
                 </button>
 
-                <div className="flex justify-center mt-8 lg:justify-start gap-2">
-                  {templates.map((_, idx) => (
-                    <div
-                      key={idx}
-                      className={`h-1.5 rounded-full transition-all duration-300 ${idx === currentIndex ? 'w-8 bg-indigo-500' : 'w-2 bg-neutral-800'}`}
-                    />
-                  ))}
+                <div className="flex items-center justify-between lg:justify-start mt-6 sm:mt-8">
+                  <button
+                    onClick={prevTemplate}
+                    className="flex lg:hidden w-11 h-11 rounded-full bg-neutral-900 border border-neutral-800 items-center justify-center hover:bg-neutral-800 transition-colors"
+                    aria-label="Previous template"
+                  >
+                    <ChevronLeft size={22} />
+                  </button>
+
+                  <div className="flex justify-center gap-2">
+                    {templates.map((_, idx) => (
+                      <div
+                        key={idx}
+                        className={`h-1.5 rounded-full transition-all duration-300 ${idx === currentIndex ? 'w-8 bg-indigo-500' : 'w-2 bg-neutral-800'}`}
+                      />
+                    ))}
+                  </div>
+
+                  <button
+                    onClick={nextTemplate}
+                    className="flex lg:hidden w-11 h-11 rounded-full bg-neutral-900 border border-neutral-800 items-center justify-center hover:bg-neutral-800 transition-colors"
+                    aria-label="Next template"
+                  >
+                    <ChevronRight size={22} />
+                  </button>
                 </div>
               </div>
-            </div>
-
-            {/* Mobile Navigation Controls */}
-            <div className="flex lg:hidden justify-center gap-6 mt-6 w-full shrink-0">
-              <button onClick={prevTemplate} className="w-12 h-12 rounded-full bg-neutral-900 border border-neutral-800 flex items-center justify-center hover:bg-neutral-800 transition-colors" aria-label="Previous template">
-                <ChevronLeft size={24} />
-              </button>
-              <button onClick={nextTemplate} className="w-12 h-12 rounded-full bg-neutral-900 border border-neutral-800 flex items-center justify-center hover:bg-neutral-800 transition-colors" aria-label="Next template">
-                <ChevronRight size={24} />
-              </button>
             </div>
           </div>
 
@@ -196,7 +200,6 @@ export default function Home() {
           >
             <ChevronRight size={28} />
           </button>
-
         </div>
       </div>
 
