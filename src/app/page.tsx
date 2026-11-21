@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { templates } from "@/config/templates";
 import Header from "@/components/Header";
+import { useSwipe } from "@/hooks/useSwipe";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { Login as Template1Login } from "@/templates/template-1";
@@ -49,6 +50,11 @@ export default function Home() {
     setCurrentIndex((prev) => (prev - 1 + templates.length) % templates.length);
   };
 
+  const swipeHandlers = useSwipe({
+    onSwipeLeft: nextTemplate,
+    onSwipeRight: prevTemplate,
+  });
+
   const current = templates[currentIndex];
   const PreviewComponent = previewComponents[current.id as keyof typeof previewComponents];
 
@@ -61,7 +67,11 @@ export default function Home() {
         <div className="absolute top-[20%] right-[-10%] w-[40%] h-[40%] rounded-full bg-purple-500/10 blur-[120px]" />
       </div>
 
-      <div className="relative z-10 flex-1 min-h-0 flex items-center max-w-[90rem] mx-auto w-full px-12 sm:px-20 lg:px-0 py-4">
+      <div
+        className="relative z-10 flex-1 min-h-0 flex items-center max-w-[90rem] mx-auto w-full px-12 sm:px-20 lg:px-0 py-4"
+        style={{ touchAction: "pan-y" }}
+        {...swipeHandlers}
+      >
 
         <div className="flex items-center justify-between gap-6 w-full h-full max-h-[600px]">
 
