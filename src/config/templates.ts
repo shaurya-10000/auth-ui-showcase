@@ -68,5 +68,12 @@ export const templates = [
     description: 'Luminous multi-hue mesh gradients paired with translucent surfaces and crisp contrast.',
     tags: ['Gradient', 'Mesh', 'Modern'],
     previewColor: 'bg-[#070812]',
+  },
+  {
+    id: 'template-11',
+    name: 'Swiss Grid',
+    description: 'Strict modular grid lines, bold international typography, and crisp Swiss red accents.',
+    tags: ['Swiss', 'Grid', 'Minimal'],
+    previewColor: 'bg-[#f2f2f0]',
   }
 ];
