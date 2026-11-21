@@ -56,13 +56,13 @@ export default function Home() {
       <Header />
 
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-indigo-500/10 blur-[120px]" />
-        <div className="absolute top-[20%] -right-[10%] w-[40%] h-[40%] rounded-full bg-purple-500/10 blur-[120px]" />
+        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-indigo-500/10 blur-[120px]" />
+        <div className="absolute top-[20%] right-[-10%] w-[40%] h-[40%] rounded-full bg-purple-500/10 blur-[120px]" />
       </div>
 
       <div className="relative z-10 flex-1 flex flex-col justify-center max-w-7xl mx-auto w-full px-6 pt-24 pb-12">
 
-        <div className="relative flex items-center justify-between gap-8 h-[500px]">
+        <div className="relative flex items-center justify-between gap-8 h-125">
 
           <button
             onClick={prevTemplate}
@@ -82,7 +82,7 @@ export default function Home() {
               {/* 1440x810 canvas scaled to exactly fit the box width */}
               <div className="absolute inset-0 pointer-events-none overflow-hidden">
                 <div
-                  className="absolute top-0 left-0 w-[1440px] h-[810px] bg-[#0a0a0a] overflow-hidden [&>*]:!h-full [&>*]:!min-h-0 [&>*]:!w-full"
+                  className="absolute top-0 left-0 w-360 h-202.5 bg-[#0a0a0a] overflow-hidden *:h-full! *:min-h-0! *:w-full!"
                   style={{ transform: `scale(${scale})`, transformOrigin: "top left" }}
                 >
                   {PreviewComponent ? <PreviewComponent /> : (
