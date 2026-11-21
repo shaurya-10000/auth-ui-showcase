@@ -75,5 +75,12 @@ export const templates = [
     description: 'Strict modular grid lines, bold international typography, and crisp Swiss red accents.',
     tags: ['Swiss', 'Grid', 'Minimal'],
     previewColor: 'bg-[#f2f2f0]',
+  },
+  {
+    id: 'template-12',
+    name: 'Midnight Split',
+    description: 'High-contrast split layout pairing an editorial dark panel with warm amber accents.',
+    tags: ['Split Layout', 'Dark Mode', 'B2B'],
+    previewColor: 'bg-[#09090b]',
   }
 ];
