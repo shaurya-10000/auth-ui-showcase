@@ -39,6 +39,8 @@ export default function CodeSidebar({ open, templateId, templateName, onClose }:
 
     const previouslyFocused = document.activeElement as HTMLElement | null;
     closeButtonRef.current?.focus();
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") onCloseRef.current();
@@ -47,6 +49,7 @@ export default function CodeSidebar({ open, templateId, templateName, onClose }:
 
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = previousOverflow;
       previouslyFocused?.focus();
     };
   }, [open]);

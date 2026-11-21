@@ -7,7 +7,8 @@ Premium authentication UI templates for Next.js. Browse 8 distinct login and sig
 - **Live carousel** - each template is previewed as a real, scaled-down login page, not a screenshot.
 - **Swipe and arrows** - navigate with touch swipe on mobile or the arrow buttons on desktop.
 - **Login and sign-up pages** - every template ships with both, plus a back button to return to the carousel.
-- **View Code sidebar** - browse every file of a template with line numbers and copy buttons, without leaving the page.
+- **Grid view** - see all templates at once at `/grid`, each card with Preview, Code and View Code buttons.
+- **View Code sidebar** - browse every file of a template with line numbers and copy buttons, without leaving the page. Available from both the carousel and the grid view.
 - **Run without a zip** - one PowerShell or Terminal command creates a fresh Next.js app with the template installed and running.
 - **Zip download** - the full template as a downloadable archive.
 
