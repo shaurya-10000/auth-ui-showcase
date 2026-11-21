@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { templates } from "@/config/templates";
 import Header from "@/components/Header";
+import CodeSidebar from "@/components/CodeSidebar";
 import { useSwipe } from "@/hooks/useSwipe";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Code as CodeIcon } from "lucide-react";
 
 import { Login as Template1Login } from "@/templates/template-1";
 import { Login as Template2Login } from "@/templates/template-2";
@@ -29,6 +30,7 @@ const previewComponents = {
 
 export default function Home() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isCodeOpen, setIsCodeOpen] = useState(false);
   const [scale, setScale] = useState(0.4);
   const boxRef = useRef<HTMLDivElement>(null);
 
@@ -49,6 +51,8 @@ export default function Home() {
   const prevTemplate = () => {
     setCurrentIndex((prev) => (prev - 1 + templates.length) % templates.length);
   };
+
+  const closeCode = useCallback(() => setIsCodeOpen(false), []);
 
   const swipeHandlers = useSwipe({
     onSwipeLeft: nextTemplate,
@@ -152,6 +156,16 @@ export default function Home() {
                   </a>
                 </div>
 
+                <button
+                  type="button"
+                  onClick={() => setIsCodeOpen(true)}
+                  aria-haspopup="dialog"
+                  className="mt-3 w-full flex items-center justify-center gap-2 bg-neutral-900 border border-neutral-800 text-white font-semibold py-3 rounded-xl hover:bg-neutral-800 transition-colors"
+                >
+                  <CodeIcon size={18} />
+                  View Code
+                </button>
+
                 <div className="flex justify-center mt-8 lg:justify-start gap-2">
                   {templates.map((_, idx) => (
                     <div
@@ -185,6 +199,13 @@ export default function Home() {
 
         </div>
       </div>
+
+      <CodeSidebar
+        open={isCodeOpen}
+        templateId={current.id}
+        templateName={current.name}
+        onClose={closeCode}
+      />
     </main>
   );
 }
