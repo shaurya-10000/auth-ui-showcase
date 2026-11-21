@@ -54,5 +54,12 @@ export const templates = [
     description: 'Realistic, tactile UI elements with gradients and deep shadows.',
     tags: ['3D', 'Classic', 'Realistic'],
     previewColor: 'bg-gradient-to-b from-[#4a5568] to-[#2d3748]',
+  },
+  {
+    id: 'template-9',
+    name: 'Editorial Serif',
+    description: 'Refined magazine-inspired typography with warm paper tones and subtle hairlines.',
+    tags: ['Editorial', 'Serif', 'Minimal'],
+    previewColor: 'bg-[#faf8f5]',
   }
 ];
