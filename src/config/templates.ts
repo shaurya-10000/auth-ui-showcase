@@ -89,5 +89,12 @@ export const templates = [
     description: 'Cool slate-blue surfaces, soft rounded cards, and calm Scandinavian contrast.',
     tags: ['Nordic', 'Frost', 'Calm UI'],
     previewColor: 'bg-[#eef2f6]',
+  },
+  {
+    id: 'template-14',
+    name: 'Warm Terracotta',
+    description: 'Earthy clay surfaces, soft warmth, and inviting contrast for creative tools.',
+    tags: ['Terracotta', 'Warm UI', 'Creative'],
+    previewColor: 'bg-[#fbf4f0]',
   }
 ];

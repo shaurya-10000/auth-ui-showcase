@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "AuthShowcase — Premium Auth UI Templates for Next.js",
-  description: "13 unique designs. One-click download.",
+  description: "14 unique designs. One-click download.",
   icons: {
     icon: [
       { url: "/icon.svg", type: "image/svg+xml" },
