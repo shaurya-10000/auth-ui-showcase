@@ -21,6 +21,7 @@ import { Login as T11 } from "@/templates/template-11";
 import { Login as T12 } from "@/templates/template-12";
 import { Login as T13 } from "@/templates/template-13";
 import { Login as T14 } from "@/templates/template-14";
+import { Login as T15 } from "@/templates/template-15";
 
 const previewMap = {
   'template-1': T1,
@@ -37,6 +38,7 @@ const previewMap = {
   'template-12': T12,
   'template-13': T13,
   'template-14': T14,
+  'template-15': T15,
 };
 
 interface GridCardProps {

@@ -96,5 +96,12 @@ export const templates = [
     description: 'Earthy clay surfaces, soft warmth, and inviting contrast for creative tools.',
     tags: ['Terracotta', 'Warm UI', 'Creative'],
     previewColor: 'bg-[#fbf4f0]',
+  },
+  {
+    id: 'template-15',
+    name: 'Botanical Olive',
+    description: 'Grounded sage and olive greens paired with soft organic surfaces.',
+    tags: ['Botanical', 'Organic', 'Calm UI'],
+    previewColor: 'bg-[#f3f6f1]',
   }
 ];

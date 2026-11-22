@@ -1,0 +1,101 @@
+"use client";
+import { useState } from "react";
+import Link from "next/link";
+import { ArrowRight, Leaf, Sun, Moon } from "lucide-react";
+
+export default function Login() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isDark, setIsDark] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setTimeout(() => setIsLoading(false), 1500);
+  };
+
+  return (
+    <div className={`min-h-screen flex items-center justify-center p-4 sm:p-8 font-sans transition-colors duration-300 ${isDark ? 'bg-[#121713] text-[#eef2ec]' : 'bg-[#f3f6f1] text-[#1a241c]'}`}>
+
+      {/* Floating Theme Toggle */}
+      <button
+        onClick={() => setIsDark(!isDark)}
+        className={`fixed top-6 right-6 z-50 p-2.5 rounded-full border transition-colors ${isDark ? 'border-[#273329] bg-[#1a221c] text-[#a3c49a] hover:bg-[#273329]' : 'border-[#d7e0d3] bg-white text-[#1a241c] hover:bg-[#f8faf7]'}`}
+        aria-label="Toggle theme"
+      >
+        {isDark ? <Sun size={18} /> : <Moon size={18} />}
+      </button>
+
+      {/* Botanical Olive Card */}
+      <div className={`w-full max-w-md rounded-3xl border p-7 sm:p-10 transition-all duration-300 ${isDark ? 'border-[#273329] bg-[#182019] shadow-[0_24px_60px_rgba(0,0,0,0.45)]' : 'border-[#d7e0d3] bg-white shadow-[0_24px_60px_rgba(45,90,54,0.08)]'}`}>
+        <div className="mb-8">
+          <div className={`inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium mb-4 ${isDark ? 'bg-[#3f6b47]/25 text-[#a3c49a]' : 'bg-[#3f6b47]/10 text-[#2f5436]'}`}>
+            <Leaf size={13} />
+            Verdant Field
+          </div>
+          <h1 className="text-3xl font-bold tracking-tight">Welcome back</h1>
+          <p className={`mt-1.5 text-sm ${isDark ? 'text-[#a6b5a8]' : 'text-[#526355]'}`}>
+            Grounded organic tones for calm, sustainable products.
+          </p>
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div>
+            <label className={`block text-xs font-semibold uppercase tracking-wider mb-2 ${isDark ? 'text-[#ced9cf]' : 'text-[#334236]'}`}>
+              Email
+            </label>
+            <input
+              type="email"
+              required
+              placeholder="arjun@verdant.eco"
+              className={`w-full rounded-xl border px-4 py-3 text-sm focus:outline-none focus:ring-2 transition-all ${isDark ? 'border-[#273329] bg-[#121713] text-[#eef2ec] placeholder-[#607063] focus:border-[#6fa378] focus:ring-[#6fa378]/20' : 'border-[#d2ddd0] bg-[#f8faf7] text-[#1a241c] placeholder-[#94a396] focus:border-[#3f6b47] focus:ring-[#3f6b47]/20'}`}
+            />
+          </div>
+
+          <div>
+            <div className="flex items-center justify-between mb-2">
+              <label className={`block text-xs font-semibold uppercase tracking-wider ${isDark ? 'text-[#ced9cf]' : 'text-[#334236]'}`}>
+                Password
+              </label>
+              <a href="#" className={`text-xs font-medium transition-colors ${isDark ? 'text-[#a3c49a] hover:text-[#bed9b6]' : 'text-[#3f6b47] hover:text-[#2a4a30]'}`}>
+                Forgot?
+              </a>
+            </div>
+            <input
+              type="password"
+              required
+              placeholder="••••••••"
+              className={`w-full rounded-xl border px-4 py-3 text-sm focus:outline-none focus:ring-2 transition-all ${isDark ? 'border-[#273329] bg-[#121713] text-[#eef2ec] placeholder-[#607063] focus:border-[#6fa378] focus:ring-[#6fa378]/20' : 'border-[#d2ddd0] bg-[#f8faf7] text-[#1a241c] placeholder-[#94a396] focus:border-[#3f6b47] focus:ring-[#3f6b47]/20'}`}
+            />
+          </div>
+
+          <div className="flex items-center gap-2.5">
+            <input
+              type="checkbox"
+              id="olive-remember"
+              className="h-4 w-4 rounded accent-[#3f6b47]"
+            />
+            <label htmlFor="olive-remember" className={`text-xs ${isDark ? 'text-[#a6b5a8]' : 'text-[#526355]'}`}>
+              Keep me signed in
+            </label>
+          </div>
+
+          <button
+            type="submit"
+            disabled={isLoading}
+            className="w-full rounded-xl bg-[#3f6b47] hover:bg-[#33583a] text-white font-semibold text-sm py-3 px-4 flex items-center justify-center gap-2 transition-colors disabled:opacity-60"
+          >
+            <span>{isLoading ? "Signing in..." : "Sign in"}</span>
+            {!isLoading && <ArrowRight size={16} />}
+          </button>
+        </form>
+
+        <p className={`mt-8 text-center text-sm ${isDark ? 'text-[#96a698]' : 'text-[#526355]'}`}>
+          New to Verdant?{" "}
+          <Link href="/signup/template-15" className={`font-semibold underline underline-offset-4 ${isDark ? 'text-[#eef2ec] hover:text-[#a3c49a]' : 'text-[#1a241c] hover:text-[#3f6b47]'}`}>
+            Create an account
+          </Link>
+        </p>
+      </div>
+    </div>
+  );
+}
