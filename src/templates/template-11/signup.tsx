@@ -1,11 +1,19 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Sun, Moon } from "lucide-react";
+import { Sun, Moon } from "lucide-react";
+import { brand as defaultBrand, type Brand } from "./brand";
+import BrandMark from "./brand-mark";
+import { brandVars, themeClasses } from "./theme";
 
-export default function Signup() {
+interface SignupProps {
+  brand?: Brand;
+}
+
+export default function Signup({ brand = defaultBrand }: SignupProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [isDark, setIsDark] = useState(false);
+  const theme = themeClasses(isDark);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -14,113 +22,84 @@ export default function Signup() {
   };
 
   return (
-    <div className={`min-h-screen flex items-center justify-center p-4 sm:p-8 font-sans transition-colors duration-300 ${isDark ? 'bg-neutral-950 text-white' : 'bg-[#f2f2f0] text-[#111111]'}`}>
-
-      {/* Floating Theme Toggle */}
+    <div className={`${theme.page} py-12`} style={brandVars(brand.accent)}>
       <button
         onClick={() => setIsDark(!isDark)}
-        className={`fixed top-6 right-6 z-50 h-10 w-10 flex items-center justify-center border transition-colors ${isDark ? 'border-neutral-700 bg-neutral-900 text-amber-300 hover:bg-neutral-800' : 'border-[#111111] bg-white text-[#111111] hover:bg-neutral-100'}`}
+        className={theme.toggle}
         aria-label="Toggle theme"
       >
-        {isDark ? <Sun size={18} /> : <Moon size={18} />}
+        {isDark ? <Sun size={14} className="inline mr-1.5" /> : <Moon size={14} className="inline mr-1.5" />}
+        <span>{isDark ? "Light" : "Dark"}</span>
       </button>
 
-      {/* Swiss Modular Grid Frame */}
-      <div className={`w-full max-w-4xl border grid grid-cols-1 md:grid-cols-12 transition-colors ${isDark ? 'border-neutral-800 bg-neutral-900' : 'border-[#111111] bg-white'}`}>
-
-        {/* Left Index & Brand Column */}
-        <div className={`md:col-span-5 flex flex-col justify-between border-b md:border-b-0 md:border-r ${isDark ? 'border-neutral-800' : 'border-[#111111]'}`}>
-          <div className={`p-6 border-b flex items-center justify-between text-xs font-bold tracking-widest uppercase ${isDark ? 'border-neutral-800 text-neutral-400' : 'border-[#111111] text-[#111111]'}`}>
-            <span>SYS / 11</span>
-            <span>NEW ENTRY</span>
-          </div>
-
-          <div className="p-6 sm:p-8 my-auto">
-            <div className="h-3 w-12 bg-[#e11d48] mb-6" />
-            <h1 className="text-4xl sm:text-5xl font-bold tracking-tight leading-[1.02] mb-4">
-              Register.
-            </h1>
-            <p className={`text-sm leading-relaxed ${isDark ? 'text-neutral-400' : 'text-neutral-600'}`}>
-              Structured onboarding built on clear alignment, bold contrast, and grid precision.
-            </p>
-          </div>
-
-          <div className={`p-6 border-t grid grid-cols-2 text-xs font-medium ${isDark ? 'border-neutral-800 text-neutral-400' : 'border-[#111111] text-neutral-600'}`}>
-            <div>GRID: 12-COL</div>
-            <div className="text-right">V.2026</div>
-          </div>
-        </div>
-
-        {/* Right Form Column */}
-        <div className="md:col-span-7 flex flex-col justify-between">
-          <div className={`p-6 border-b text-xs font-bold tracking-widest uppercase ${isDark ? 'border-neutral-800 text-neutral-400' : 'border-[#111111] text-[#111111]'}`}>
-            ACCOUNT REGISTRATION
-          </div>
-
-          <form onSubmit={handleSubmit} className="p-6 sm:p-8 space-y-4 my-auto">
+      <div className={theme.frame}>
+        <div className={theme.grid}>
+          <div className={theme.metaCol}>
             <div>
-              <label className={`block text-xs font-bold uppercase tracking-wider mb-1.5 ${isDark ? 'text-neutral-300' : 'text-[#111111]'}`}>
-                01 / Full Name
-              </label>
-              <input
-                type="text"
-                required
-                placeholder="Lukas Meyer"
-                className={`w-full border px-3.5 py-2.5 text-sm focus:outline-none transition-colors ${isDark ? 'border-neutral-700 bg-neutral-950 text-white placeholder-neutral-600 focus:border-[#e11d48]' : 'border-[#111111] bg-[#fafaf9] text-[#111111] placeholder-neutral-400 focus:border-[#e11d48]'}`}
-              />
+              <BrandMark brand={brand} isDark={isDark} />
+              <p className={theme.indexTag}>02 / REGISTRATION</p>
+              <h1 className={theme.heading}>{brand.signupTitle}</h1>
+              <p className={theme.subtitle}>{brand.signupSubtitle}</p>
             </div>
+            <p className={`${theme.fieldIndex} mt-8`}>GRID 12-COL // 02</p>
+          </div>
 
-            <div>
-              <label className={`block text-xs font-bold uppercase tracking-wider mb-1.5 ${isDark ? 'text-neutral-300' : 'text-[#111111]'}`}>
-                02 / Email Address
-              </label>
-              <input
-                type="email"
-                required
-                placeholder="lukas@studio.ch"
-                className={`w-full border px-3.5 py-2.5 text-sm focus:outline-none transition-colors ${isDark ? 'border-neutral-700 bg-neutral-950 text-white placeholder-neutral-600 focus:border-[#e11d48]' : 'border-[#111111] bg-[#fafaf9] text-[#111111] placeholder-neutral-400 focus:border-[#e11d48]'}`}
-              />
+          <div className={theme.formCol}>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <div className="flex items-center justify-between mb-1.5">
+                  <label className={theme.fieldLabel}>Full Name</label>
+                  <span className={theme.fieldIndex}>01</span>
+                </div>
+                <input
+                  type="text"
+                  required
+                  className={theme.input}
+                  placeholder="Lukas Meier"
+                />
+              </div>
+
+              <div>
+                <div className="flex items-center justify-between mb-1.5">
+                  <label className={theme.fieldLabel}>Email Address</label>
+                  <span className={theme.fieldIndex}>02</span>
+                </div>
+                <input
+                  type="email"
+                  required
+                  className={theme.input}
+                  placeholder="name@studio.ch"
+                />
+              </div>
+
+              <div>
+                <div className="flex items-center justify-between mb-1.5">
+                  <label className={theme.fieldLabel}>Password</label>
+                  <span className={theme.fieldIndex}>03</span>
+                </div>
+                <input
+                  type="password"
+                  required
+                  className={theme.input}
+                  placeholder="••••••••"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={isLoading}
+                className={`${theme.submit} mt-2`}
+              >
+                {isLoading ? "Creating..." : brand.signupSubmit}
+              </button>
+            </form>
+
+            <div className={theme.footer}>
+              <span>{brand.signinPrompt}</span>
+              <Link href="/login/template-11" className={theme.footerLink}>
+                {brand.signinLink}
+              </Link>
             </div>
-
-            <div>
-              <label className={`block text-xs font-bold uppercase tracking-wider mb-1.5 ${isDark ? 'text-neutral-300' : 'text-[#111111]'}`}>
-                03 / Password
-              </label>
-              <input
-                type="password"
-                required
-                placeholder="••••••••"
-                className={`w-full border px-3.5 py-2.5 text-sm focus:outline-none transition-colors ${isDark ? 'border-neutral-700 bg-neutral-950 text-white placeholder-neutral-600 focus:border-[#e11d48]' : 'border-[#111111] bg-[#fafaf9] text-[#111111] placeholder-neutral-400 focus:border-[#e11d48]'}`}
-              />
-            </div>
-
-            <div className="flex items-start gap-2.5 pt-1">
-              <input
-                type="checkbox"
-                id="swiss-terms"
-                required
-                className="mt-0.5 h-4 w-4 accent-[#e11d48]"
-              />
-              <label htmlFor="swiss-terms" className={`text-xs ${isDark ? 'text-neutral-300' : 'text-neutral-700'}`}>
-                I accept the <a href="#" className="underline font-semibold">Terms of Service</a> and <a href="#" className="underline font-semibold">Privacy Policy</a>.
-              </label>
-            </div>
-
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full bg-[#e11d48] hover:bg-[#be123c] text-white font-bold text-xs uppercase tracking-widest py-3.5 px-5 flex items-center justify-between transition-colors disabled:opacity-60 mt-2"
-            >
-              <span>{isLoading ? "Creating Account..." : "Create Account"}</span>
-              <ArrowRight size={16} />
-            </button>
-          </form>
-
-          <div className={`p-6 border-t flex items-center justify-between text-xs ${isDark ? 'border-neutral-800 text-neutral-400' : 'border-[#111111] text-neutral-600'}`}>
-            <span>EXISTING MEMBER?</span>
-            <Link href="/login/template-11" className={`font-bold uppercase tracking-wider underline underline-offset-4 ${isDark ? 'text-white hover:text-[#e11d48]' : 'text-[#111111] hover:text-[#e11d48]'}`}>
-              Sign In
-            </Link>
           </div>
         </div>
       </div>
