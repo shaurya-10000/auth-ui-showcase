@@ -82,5 +82,12 @@ export const templates = [
     description: 'High-contrast split layout pairing an editorial dark panel with warm amber accents.',
     tags: ['Split Layout', 'Dark Mode', 'B2B'],
     previewColor: 'bg-[#09090b]',
+  },
+  {
+    id: 'template-13',
+    name: 'Nordic Frost',
+    description: 'Cool slate-blue surfaces, soft rounded cards, and calm Scandinavian contrast.',
+    tags: ['Nordic', 'Frost', 'Calm UI'],
+    previewColor: 'bg-[#eef2f6]',
   }
 ];
