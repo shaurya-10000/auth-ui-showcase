@@ -2,7 +2,7 @@
 
 # AuthShowcase
 
-**A curated gallery of 15 distinct, fully responsive login and sign-up templates for Next.js. Preview them live, read the source in the browser, then run one command to get the code.**
+**A curated gallery of 16 distinct, fully responsive login and sign-up templates for Next.js. Preview them live, read the source in the browser, then run one command to get the code.**
 
 [![Live Demo](https://img.shields.io/badge/Live_Demo-Visit-success?style=for-the-badge&logo=vercel&logoColor=white)](https://auth-ui-showcase-rho.vercel.app)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](./LICENSE)
@@ -27,7 +27,7 @@
 
 |  |  |
 | :--- | :--- |
-| **What** | A gallery of 15 authentication UI designs. Each template ships a login page and a sign-up page, previewed live in a carousel or a grid. |
+| **What** | A gallery of 16 authentication UI designs. Each template ships a login page and a sign-up page, previewed live in a carousel or a grid. |
 | **Why it's interesting** | Previews are the real components, rendered at 1440x810 and scaled to fit, not screenshots. The same template folder powers the in-browser code viewer and the no-zip installer scripts, so there is one source of truth. |
 | **Stack** | Next.js (App Router) · React · TypeScript · Tailwind CSS · lucide-react |
 
@@ -56,7 +56,7 @@
 ## Features
 
 - **Live carousel.** Every slide is a working login component scaled into a preview box. Navigate with the arrow buttons, or swipe on touch devices.
-- **Grid view.** See all 15 templates at once at `/grid`. Each card has Preview, Code and View Code buttons.
+- **Grid view.** See all 16 templates at once at `/grid`. Each card has Preview, Code and View Code buttons.
 - **Login and sign-up pages.** Every template has both, reachable at `/login/<id>` and `/signup/<id>`, with a back button that returns to the gallery and a day/night toggle.
 - **View Code sidebar.** A drawer with two tabs. **Source files** lists every file of the template with line numbers and a copy button per file. **Run locally** gives you the install commands. Available from both the carousel and the grid.
 - **Run without a zip.** One PowerShell or Terminal command creates a fresh Next.js app, drops the template in, installs its dependencies and starts the dev server.
@@ -244,7 +244,7 @@ src/
     template-source/              Reads template files, detects dependencies and image hosts
     install-script/               Builds the PowerShell and bash installers
   templates/
-    template-1 ... template-15/    index.ts, login.tsx, signup.tsx per template
+    template-1 ... template-16/    index.ts, login.tsx, signup.tsx per template
 public/                           Static assets and icons
 .github/workflows/                CI workflow
 ```
@@ -309,7 +309,7 @@ The `/api/code` and `/api/install` routes declare `generateStaticParams`, so the
 
 - **Installers include only the template folder.** If a template depends on shared components or global CSS, copy those separately.
 - **Plain-text code viewer.** The sidebar shows line numbers and copy, but no syntax highlighting yet.
-- **Grid renders every preview.** All 15 live previews mount at once, which is fine at this size but heavier than static images.
+- **Grid renders every preview.** All 16 live previews mount at once, which is fine at this size but heavier than static images.
 - **Touch only for swipe.** Mouse drag and keyboard arrows are not wired to the carousel.
 - **Remote avatars.** Some previews load sample avatars from a third-party host and need a network connection.
 

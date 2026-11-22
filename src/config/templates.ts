@@ -103,5 +103,12 @@ export const templates = [
     description: 'Grounded sage and olive greens paired with soft organic surfaces.',
     tags: ['Botanical', 'Organic', 'Calm UI'],
     previewColor: 'bg-[#f3f6f1]',
+  },
+  {
+    id: 'template-16',
+    name: 'Royal Indigo',
+    description: 'Rich midnight-indigo surfaces paired with luminous violet-blue accents and crisp contrast.',
+    tags: ['Indigo', 'Enterprise', 'Modern'],
+    previewColor: 'bg-[#0b0d1e]',
   }
 ];

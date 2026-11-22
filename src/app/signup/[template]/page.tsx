@@ -13,6 +13,7 @@ import { Signup as Template12Signup } from '@/templates/template-12';
 import { Signup as Template13Signup } from '@/templates/template-13';
 import { Signup as Template14Signup } from '@/templates/template-14';
 import { Signup as Template15Signup } from '@/templates/template-15';
+import { Signup as Template16Signup } from '@/templates/template-16';
 import { notFound } from 'next/navigation';
 
 const templateMap = {
@@ -31,6 +32,7 @@ const templateMap = {
   'template-13': Template13Signup,
   'template-14': Template14Signup,
   'template-15': Template15Signup,
+  'template-16': Template16Signup,
 };
 
 export function generateStaticParams() {
@@ -50,6 +52,7 @@ export function generateStaticParams() {
     { template: 'template-13' },
     { template: 'template-14' },
     { template: 'template-15' },
+    { template: 'template-16' },
   ];
 }
 

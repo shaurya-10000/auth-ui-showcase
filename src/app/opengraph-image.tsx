@@ -82,7 +82,7 @@ export default async function Image() {
             display: 'flex',
           }}
         >
-          15 unique designs. One-click download.
+          16 unique designs. One-click download.
         </div>
       </div>
     ),
