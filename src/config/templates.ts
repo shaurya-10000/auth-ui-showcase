@@ -110,5 +110,12 @@ export const templates = [
     description: 'Rich midnight-indigo surfaces paired with luminous violet-blue accents and crisp contrast.',
     tags: ['Indigo', 'Enterprise', 'Modern'],
     previewColor: 'bg-[#0b0d1e]',
+  },
+  {
+    id: 'template-17',
+    name: 'Kinetic Glass',
+    description: 'Frosted glass surfaces with smooth entrances, ambient glow, and responsive micro-motion.',
+    tags: ['Animated', 'Glass', 'Modern'],
+    previewColor: 'bg-indigo-950',
   }
 ];
