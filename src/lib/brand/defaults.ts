@@ -7,6 +7,7 @@ import { brand as template6 } from "@/templates/template-6/brand";
 import { brand as template7 } from "@/templates/template-7/brand";
 import { brand as template8 } from "@/templates/template-8/brand";
 import { brand as template9 } from "@/templates/template-9/brand";
+import { brand as template10 } from "@/templates/template-10/brand";
 import type { BrandValues } from "./types";
 
 /** Templates that support customization. Add a line here when a template gets a brand.ts. */
@@ -20,6 +21,7 @@ const DEFAULTS: Record<string, BrandValues> = {
   "template-7": template7,
   "template-8": template8,
   "template-9": template9,
+  "template-10": template10,
 };
 
 export function isBrandable(templateId: string): boolean {
