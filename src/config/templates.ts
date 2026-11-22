@@ -117,5 +117,12 @@ export const templates = [
     description: 'Frosted glass surfaces with smooth entrances, ambient glow, and responsive micro-motion.',
     tags: ['Animated', 'Glass', 'Modern'],
     previewColor: 'bg-indigo-950',
+  },
+  {
+    id: 'template-18',
+    name: 'Monochrome Minimalist',
+    description: 'Crisp black-and-white surfaces, refined hairlines, and balanced spacing.',
+    tags: ['Monochrome', 'Minimal', 'Editorial'],
+    previewColor: 'bg-zinc-900',
   }
 ];
