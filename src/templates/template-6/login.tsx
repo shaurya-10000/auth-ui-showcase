@@ -2,10 +2,18 @@
 import { useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Sun, Moon } from "lucide-react";
+import { brand as defaultBrand, type Brand } from "./brand";
+import BrandMark from "./brand-mark";
+import { brandVars, themeClasses } from "./theme";
 
-export default function Login() {
+interface LoginProps {
+  brand?: Brand;
+}
+
+export default function Login({ brand = defaultBrand }: LoginProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [isDark, setIsDark] = useState(false);
+  const theme = themeClasses(isDark);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -14,89 +22,93 @@ export default function Login() {
   };
 
   return (
-    <div className={`min-h-screen flex items-center justify-center p-4 md:p-8 font-sans transition-colors duration-500 ${isDark ? 'bg-[#0f0f11]' : 'bg-[#f5f5f7]'}`}>
-      
+    <div className={theme.page} style={brandVars(brand.accent)}>
+
       {/* Floating Theme Toggle */}
-      <button 
+      <button
         onClick={() => setIsDark(!isDark)}
-        className={`fixed top-6 right-6 z-50 p-2.5 rounded-full transition-all duration-300 ${isDark ? 'bg-[#1c1c1e] text-yellow-400 hover:bg-[#2c2c2e]' : 'bg-white text-gray-700 hover:bg-gray-100 shadow-sm border border-black/5'}`}
+        className={theme.toggle}
         aria-label="Toggle theme"
       >
         {isDark ? <Sun size={20} /> : <Moon size={20} />}
       </button>
 
-      <div className="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-        
+      <div className={theme.grid}>
+
         {/* Left Card (Branding) */}
-        <div className={`rounded-[2rem] p-10 flex flex-col justify-between transition-colors duration-500 min-h-[400px] ${isDark ? 'bg-[#1c1c1e] border border-white/5' : 'bg-white border border-black/5 shadow-sm'}`}>
+        <div className={theme.leftLoginCard}>
           <div>
-            <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-8 transition-colors ${isDark ? 'bg-white' : 'bg-black'}`}>
-              <span className={`font-bold text-xl ${isDark ? 'text-black' : 'text-white'}`}>B</span>
-            </div>
-            <h1 className={`text-4xl font-semibold tracking-tight mb-4 leading-tight transition-colors ${isDark ? 'text-white' : 'text-gray-900'}`}>
-              Welcome to the <br /> Bento Experience.
+            <BrandMark brand={brand} isDark={isDark} />
+            <h1 className={`${theme.leftHeading} whitespace-pre-line`}>
+              {brand.headline}
             </h1>
-            <p className={`text-lg max-w-sm transition-colors ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
-              A clean, minimal approach to secure authentication. Built for modern web apps.
+            <p className={theme.leftSubheadline}>
+              {brand.subheadline}
             </p>
           </div>
-          <div className="flex items-center gap-3 mt-8">
-            <div className="flex -space-x-3">
-              <div className={`w-8 h-8 rounded-full bg-blue-500 border-2 ${isDark ? 'border-[#1c1c1e]' : 'border-white'}`} />
-              <div className={`w-8 h-8 rounded-full bg-green-500 border-2 ${isDark ? 'border-[#1c1c1e]' : 'border-white'}`} />
-              <div className={`w-8 h-8 rounded-full bg-purple-500 border-2 ${isDark ? 'border-[#1c1c1e]' : 'border-white'}`} />
+          {brand.trustText && (
+            <div className="flex items-center gap-3 mt-8">
+              <div className="flex -space-x-3">
+                <div className={`w-8 h-8 rounded-full bg-blue-500 border-2 ${theme.avatarBorder}`} />
+                <div className={`w-8 h-8 rounded-full bg-green-500 border-2 ${theme.avatarBorder}`} />
+                <div className={`w-8 h-8 rounded-full bg-purple-500 border-2 ${theme.avatarBorder}`} />
+              </div>
+              <p className={theme.trustText}>{brand.trustText}</p>
             </div>
-            <p className={`text-sm font-medium transition-colors ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>Trusted by thousands</p>
-          </div>
+          )}
         </div>
 
         {/* Right Card (Form) */}
-        <div className={`rounded-[2rem] p-10 flex flex-col justify-center transition-colors duration-500 ${isDark ? 'bg-[#1c1c1e] border border-white/5' : 'bg-white border border-black/5 shadow-sm'}`}>
-          <h2 className={`text-2xl font-semibold mb-8 transition-colors ${isDark ? 'text-white' : 'text-gray-900'}`}>Sign in</h2>
-          
+        <div className={theme.formCard}>
+          <h2 className={theme.heading}>{brand.loginTitle}</h2>
+
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className={`block text-sm font-medium mb-1.5 transition-colors ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>Email</label>
-              <input 
-                type="email" 
-                required 
-                className={`w-full rounded-xl px-4 py-3 focus:outline-none focus:ring-2 transition-all placeholder-gray-400 ${isDark ? 'bg-[#2c2c2e] text-white focus:ring-white/20' : 'bg-[#f5f5f7] text-gray-900 focus:ring-black/10'}`}
-                placeholder="name@example.com" 
+              <label className={theme.fieldLabel}>Email</label>
+              <input
+                type="email"
+                required
+                className={theme.input}
+                placeholder="name@example.com"
               />
             </div>
 
             <div>
-              <label className={`block text-sm font-medium mb-1.5 transition-colors ${isDark ? 'text-gray-300' : 'text-gray-700'}`}>Password</label>
-              <input 
-                type="password" 
-                required 
-                className={`w-full rounded-xl px-4 py-3 focus:outline-none focus:ring-2 transition-all placeholder-gray-400 ${isDark ? 'bg-[#2c2c2e] text-white focus:ring-white/20' : 'bg-[#f5f5f7] text-gray-900 focus:ring-black/10'}`}
-                placeholder="••••••••" 
+              <label className={theme.fieldLabel}>Password</label>
+              <input
+                type="password"
+                required
+                className={theme.input}
+                placeholder="••••••••"
               />
             </div>
 
             <div className="flex items-center justify-between pt-2">
-              <label className={`flex items-center gap-2 cursor-pointer text-sm transition-colors ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
-                <input type="checkbox" className={`rounded focus:ring-0 ${isDark ? 'border-gray-600 bg-[#2c2c2e] text-white' : 'border-gray-300 text-black'}`} />
-                Remember me
-              </label>
-              <a href="#" className={`text-sm font-medium hover:underline transition-colors ${isDark ? 'text-white' : 'text-gray-900'}`}>Forgot password?</a>
+              {brand.showRemember ? (
+                <label className={theme.checkboxLabel}>
+                  <input type="checkbox" className={theme.checkbox} />
+                  Remember me
+                </label>
+              ) : (
+                <span />
+              )}
+              <a href="#" className={theme.forgotLink}>Forgot password?</a>
             </div>
 
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               disabled={isLoading}
-              className={`w-full font-medium rounded-xl py-3 transition-all flex items-center justify-center gap-2 disabled:opacity-70 mt-4 ${isDark ? 'bg-white text-black hover:bg-gray-200' : 'bg-black text-white hover:bg-gray-800'}`}
+              className={`${theme.submit} mt-4`}
             >
-              {isLoading ? "Signing in..." : "Sign In"}
+              {isLoading ? "Signing in..." : brand.loginSubmit}
               {!isLoading && <ArrowRight size={18} />}
             </button>
           </form>
 
-          <p className={`mt-8 text-center text-sm transition-colors ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>
-            Don&apos;t have an account?{" "}
-            <Link href="/signup/template-6" className={`font-medium hover:underline transition-colors ${isDark ? 'text-white' : 'text-black'}`}>
-              Sign up
+          <p className={theme.footer}>
+            {brand.signupPrompt}{" "}
+            <Link href="/signup/template-6" className={theme.footerLink}>
+              {brand.signupLink}
             </Link>
           </p>
         </div>
