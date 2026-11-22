@@ -11,6 +11,7 @@ import { Login as Template9Login, Signup as Template9Signup } from "@/templates/
 import { Login as Template10Login, Signup as Template10Signup } from "@/templates/template-10";
 import { Login as Template11Login, Signup as Template11Signup } from "@/templates/template-11";
 import { Login as Template12Login, Signup as Template12Signup } from "@/templates/template-12";
+import { Login as Template13Login, Signup as Template13Signup } from "@/templates/template-13";
 import type { BrandValues } from "./types";
 
 export type BrandablePage = ComponentType<{ brand?: BrandValues }>;
@@ -40,4 +41,5 @@ export const brandablePages: Record<string, BrandablePages> = {
   "template-10": pages(Template10Login, Template10Signup),
   "template-11": pages(Template11Login, Template11Signup),
   "template-12": pages(Template12Login, Template12Signup),
+  "template-13": pages(Template13Login, Template13Signup),
 };
