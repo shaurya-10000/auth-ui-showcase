@@ -3,11 +3,12 @@ export interface InstallCommands {
   unix: string;
 }
 
-export function buildInstallCommands(origin: string, templateId: string): InstallCommands {
+export function buildInstallCommands(origin: string, templateId: string, brandParam = ""): InstallCommands {
   const base = `${origin}/api/install/${encodeURIComponent(templateId)}`;
+  const query = brandParam ? `?brand=${encodeURIComponent(brandParam)}` : "";
 
   return {
-    windows: `irm "${base}/ps1" | iex`,
-    unix: `bash <(curl -fsSL "${base}/sh")`,
+    windows: `irm "${base}/ps1${query}" | iex`,
+    unix: `bash <(curl -fsSL "${base}/sh${query}")`,
   };
 }

@@ -3,6 +3,7 @@ import { buildInstallCommands } from "./commands";
 
 interface RunPanelProps {
   templateId: string;
+  brandParam?: string;
 }
 
 const STEPS = [
@@ -12,15 +13,16 @@ const STEPS = [
   "Starts the dev server so you can open it on localhost:3000.",
 ];
 
-export function RunPanel({ templateId }: RunPanelProps) {
+export function RunPanel({ templateId, brandParam = "" }: RunPanelProps) {
   const origin = typeof window === "undefined" ? "" : window.location.origin;
-  const { windows, unix } = buildInstallCommands(origin, templateId);
+  const { windows, unix } = buildInstallCommands(origin, templateId, brandParam);
 
   return (
     <div className="flex-1 space-y-6 overflow-y-auto p-5">
       <p className="text-sm leading-relaxed text-neutral-400">
         No zip needed. Open a terminal in the folder where you want the project, paste one command,
         and this template is set up and running. Requires Node.js 20 or newer.
+        {brandParam ? " These commands include your customizations." : ""}
       </p>
 
       <CommandBlock title="Windows" shell="PowerShell" command={windows} />

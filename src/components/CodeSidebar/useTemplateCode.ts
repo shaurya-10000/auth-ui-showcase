@@ -12,43 +12,45 @@ interface CodeState {
 
 const EMPTY_FILES: TemplateFile[] = [];
 
-/** Loads a template's source files the first time the sidebar is opened for it. */
-export function useTemplateCode(templateId: string, enabled: boolean) {
+/** Loads a template's source (with optional brand customizations) the first time the sidebar opens for it. */
+export function useTemplateCode(templateId: string, brandParam: string, enabled: boolean) {
   const [state, setState] = useState<CodeState>({ files: {}, errors: {} });
 
-  const cached = state.files[templateId];
-  const error = state.errors[templateId];
+  const cacheKey = `${templateId}|${brandParam}`;
+  const cached = state.files[cacheKey];
+  const error = state.errors[cacheKey];
   const shouldFetch = enabled && !cached && !error;
 
   useEffect(() => {
     if (!shouldFetch) return;
 
     const controller = new AbortController();
+    const query = brandParam ? `?brand=${encodeURIComponent(brandParam)}` : "";
 
-    fetch(`/api/code/${encodeURIComponent(templateId)}`, { signal: controller.signal })
+    fetch(`/api/code/${encodeURIComponent(templateId)}${query}`, { signal: controller.signal })
       .then(async (response) => {
         if (!response.ok) throw new Error(`request failed with status ${response.status}`);
         return (await response.json()) as { files: TemplateFile[] };
       })
       .then(({ files }) => {
-        setState((prev) => ({ ...prev, files: { ...prev.files, [templateId]: files } }));
+        setState((prev) => ({ ...prev, files: { ...prev.files, [cacheKey]: files } }));
       })
       .catch((err: unknown) => {
         if (err instanceof DOMException && err.name === "AbortError") return;
         const message = err instanceof Error ? err.message : "unknown error";
-        setState((prev) => ({ ...prev, errors: { ...prev.errors, [templateId]: message } }));
+        setState((prev) => ({ ...prev, errors: { ...prev.errors, [cacheKey]: message } }));
       });
 
     return () => controller.abort();
-  }, [shouldFetch, templateId]);
+  }, [shouldFetch, cacheKey, templateId, brandParam]);
 
   const retry = useCallback(() => {
     setState((prev) => {
       const errors = { ...prev.errors };
-      delete errors[templateId];
+      delete errors[cacheKey];
       return { ...prev, errors };
     });
-  }, [templateId]);
+  }, [cacheKey]);
 
   const status: CodeStatus = cached ? "success" : error ? "error" : enabled ? "loading" : "idle";
 

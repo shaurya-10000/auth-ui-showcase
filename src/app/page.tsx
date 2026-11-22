@@ -6,7 +6,8 @@ import { templates } from "@/config/templates";
 import Header from "@/components/Header";
 import CodeSidebar from "@/components/CodeSidebar";
 import { useSwipe } from "@/hooks/useSwipe";
-import { ChevronLeft, ChevronRight, Code as CodeIcon } from "lucide-react";
+import { ChevronLeft, ChevronRight, Code as CodeIcon, Palette } from "lucide-react";
+import { isBrandable } from "@/lib/brand/defaults";
 
 import { Login as Template1Login } from "@/templates/template-1";
 import { Login as Template2Login } from "@/templates/template-2";
@@ -168,15 +169,35 @@ export default function Home() {
                   </a>
                 </div>
 
-                <button
-                  type="button"
-                  onClick={() => setIsCodeOpen(true)}
-                  aria-haspopup="dialog"
-                  className="mt-2.5 sm:mt-3 w-full flex items-center justify-center gap-2 bg-neutral-900 border border-neutral-800 text-white text-sm sm:text-base font-semibold py-2.5 sm:py-3 rounded-xl hover:bg-neutral-800 transition-colors"
-                >
-                  <CodeIcon size={18} />
-                  View Code
-                </button>
+                <div className="mt-2.5 sm:mt-3 grid grid-cols-2 gap-2.5 sm:gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setIsCodeOpen(true)}
+                    aria-haspopup="dialog"
+                    className="flex items-center justify-center gap-2 bg-neutral-900 border border-neutral-800 text-white text-sm sm:text-base font-semibold py-2.5 sm:py-3 rounded-xl hover:bg-neutral-800 transition-colors"
+                  >
+                    <CodeIcon size={18} />
+                    View Code
+                  </button>
+                  {isBrandable(current.id) ? (
+                    <Link
+                      href={`/customize/${current.id}`}
+                      className="flex items-center justify-center gap-2 bg-neutral-900 border border-indigo-500/40 text-white text-sm sm:text-base font-semibold py-2.5 sm:py-3 rounded-xl hover:bg-neutral-800 transition-colors"
+                    >
+                      <Palette size={18} />
+                      Customize
+                    </Link>
+                  ) : (
+                    <span
+                      aria-disabled="true"
+                      title="Customization is coming to this template"
+                      className="flex items-center justify-center gap-2 bg-neutral-900/50 border border-neutral-800 text-neutral-500 text-sm sm:text-base font-semibold py-2.5 sm:py-3 rounded-xl cursor-not-allowed"
+                    >
+                      <Palette size={18} />
+                      Customize (soon)
+                    </span>
+                  )}
+                </div>
 
                 <div className="flex items-center justify-between lg:justify-start mt-6 sm:mt-8">
                   <button

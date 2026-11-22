@@ -1,5 +1,8 @@
-import { getTemplateFiles, getTemplateIds, isTemplateId } from "@/lib/template-source";
+import { applyBrandToFiles } from "@/lib/brand/apply";
 import { buildInstallPlan, renderPowerShellScript, renderShellScript } from "@/lib/install-script";
+import { getTemplateFiles, isTemplateId } from "@/lib/template-source";
+
+export const dynamic = "force-dynamic";
 
 const SHELLS = ["ps1", "sh"] as const;
 type Shell = (typeof SHELLS)[number];
@@ -10,11 +13,7 @@ function isShell(value: string): value is Shell {
   return (SHELLS as readonly string[]).includes(value);
 }
 
-export function generateStaticParams() {
-  return getTemplateIds().flatMap((id) => SHELLS.map((shell) => ({ id, shell })));
-}
-
-export async function GET(_request: Request, { params }: RouteContext) {
+export async function GET(request: Request, { params }: RouteContext) {
   const { id, shell } = await params;
 
   if (!isTemplateId(id) || !isShell(shell)) {
@@ -22,7 +21,9 @@ export async function GET(_request: Request, { params }: RouteContext) {
   }
 
   try {
-    const plan = buildInstallPlan(id, await getTemplateFiles(id));
+    const brandParam = new URL(request.url).searchParams.get("brand");
+    const files = applyBrandToFiles(id, await getTemplateFiles(id), brandParam);
+    const plan = buildInstallPlan(id, files);
     const script = shell === "ps1" ? renderPowerShellScript(plan) : renderShellScript(plan);
 
     return new Response(script, {

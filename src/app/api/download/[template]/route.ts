@@ -1,52 +1,40 @@
-import { NextResponse } from 'next/server';
-import JSZip from 'jszip';
-import fs from 'fs/promises';
-import path from 'path';
+import JSZip from "jszip";
+import { applyBrandToFiles } from "@/lib/brand/apply";
+import { getTemplateFiles, isTemplateId } from "@/lib/template-source";
 
-export async function GET(
-  request: Request,
-  { params }: { params: Promise<{ template: string }> }
-) {
-  const resolvedParams = await params;
-  const templateId = resolvedParams.template;
+export const dynamic = "force-dynamic";
 
-  if (!templateId.match(/^template-\d+$/)) {
-    return new NextResponse('Invalid template ID', { status: 400 });
+type RouteContext = { params: Promise<{ template: string }> };
+
+export async function GET(request: Request, { params }: RouteContext) {
+  const { template: templateId } = await params;
+
+  if (!isTemplateId(templateId)) {
+    return new Response("Invalid template ID", { status: 400 });
   }
 
   try {
-    const templateDir = path.join(process.cwd(), 'src', 'templates', templateId);
-    
-    const loginCode = await fs.readFile(path.join(templateDir, 'login.tsx'), 'utf8');
-    const signupCode = await fs.readFile(path.join(templateDir, 'signup.tsx'), 'utf8');
-    const indexCode = `export { default as Login } from './login';\nexport { default as Signup } from './signup';\n`;
+    const brandParam = new URL(request.url).searchParams.get("brand");
+    const files = applyBrandToFiles(templateId, await getTemplateFiles(templateId), brandParam);
 
     const zip = new JSZip();
     const folder = zip.folder(templateId);
-    
     if (!folder) throw new Error("Could not create zip folder");
 
-    folder.file('login.tsx', loginCode);
-    folder.file('signup.tsx', signupCode);
-    folder.file('index.ts', indexCode);
+    for (const file of files) folder.file(file.path, file.content);
 
-    // Generate as base64 to bypass strict TS buffer typing
-    const zipBase64 = await zip.generateAsync({ type: 'base64' });
-    
-    // Convert base64 back to a Node Buffer, then cast to 'any' for NextResponse
-    const zipBuffer = Buffer.from(zipBase64, 'base64');
+    const archive = await zip.generateAsync({ type: "arraybuffer", compression: "DEFLATE" });
+    const suffix = brandParam ? "-custom" : "";
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return new NextResponse(zipBuffer as any, {
+    return new Response(archive, {
       status: 200,
       headers: {
-        'Content-Type': 'application/zip',
-        'Content-Disposition': `attachment; filename="${templateId}-ui.zip"`,
+        "Content-Type": "application/zip",
+        "Content-Disposition": `attachment; filename="${templateId}${suffix}-ui.zip"`,
       },
     });
-
   } catch (error) {
-    console.error('Error generating zip:', error);
-    return new NextResponse('Template code not found', { status: 404 });
+    console.error("Error generating zip:", error);
+    return new Response("Template code not found", { status: 404 });
   }
 }

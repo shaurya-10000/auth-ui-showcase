@@ -12,6 +12,8 @@ interface CodeSidebarProps {
   open: boolean;
   templateId: string;
   templateName: string;
+  /** Encoded customizations (?brand= value). Empty means the template's defaults. */
+  brandParam?: string;
   onClose: () => void;
 }
 
@@ -22,18 +24,24 @@ const TABS: { id: Tab; label: string }[] = [
   { id: "run", label: "Run locally" },
 ];
 
-export default function CodeSidebar({ open, templateId, templateName, onClose }: CodeSidebarProps) {
+export default function CodeSidebar({
+  open,
+  templateId,
+  templateName,
+  brandParam = "",
+  onClose,
+}: CodeSidebarProps) {
   const [tab, setTab] = useState<Tab>("files");
   const [selectedPath, setSelectedPath] = useState<string | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const onCloseRef = useRef(onClose);
-  const { files, status, error, retry } = useTemplateCode(templateId, open);
+  const { files, status, error, retry } = useTemplateCode(templateId, brandParam, open);
 
   useEffect(() => {
     onCloseRef.current = onClose;
   }, [onClose]);
 
-  // Focus the close button on open, close on Escape, and restore focus on close.
+  // Focus the close button on open, lock page scroll, close on Escape, and restore focus on close.
   useEffect(() => {
     if (!open) return;
 
@@ -55,7 +63,10 @@ export default function CodeSidebar({ open, templateId, templateName, onClose }:
   }, [open]);
 
   const activeFile = files.find((file) => file.path === selectedPath) ?? files[0];
-  const subtitle = status === "success" ? `${files.length} files in src/templates/${templateId}` : "Source code";
+  const subtitle =
+    status === "success"
+      ? `${files.length} files in src/templates/${templateId}${brandParam ? " (customized)" : ""}`
+      : "Source code";
 
   function renderSource() {
     if (status === "error") {
@@ -73,7 +84,7 @@ export default function CodeSidebar({ open, templateId, templateName, onClose }:
     return (
       <div className="flex min-h-0 flex-1 flex-col sm:flex-row">
         <FileList files={files} activePath={activeFile.path} onSelect={setSelectedPath} />
-        <CodeViewer key={`${templateId}:${activeFile.path}`} file={activeFile} />
+        <CodeViewer key={`${templateId}:${brandParam}:${activeFile.path}`} file={activeFile} />
       </div>
     );
   }
@@ -133,7 +144,7 @@ export default function CodeSidebar({ open, templateId, templateName, onClose }:
         </div>
 
         <div role="tabpanel" className="flex min-h-0 flex-1 flex-col">
-          {tab === "run" ? <RunPanel templateId={templateId} /> : renderSource()}
+          {tab === "run" ? <RunPanel templateId={templateId} brandParam={brandParam} /> : renderSource()}
         </div>
       </aside>
     </>

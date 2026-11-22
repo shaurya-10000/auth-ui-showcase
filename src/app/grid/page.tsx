@@ -5,7 +5,8 @@ import Link from "next/link";
 import { templates } from "@/config/templates";
 import Header from "@/components/Header";
 import CodeSidebar from "@/components/CodeSidebar";
-import { Download, Code as CodeIcon } from "lucide-react";
+import { Download, Code as CodeIcon, Palette } from "lucide-react";
+import { isBrandable } from "@/lib/brand/defaults";
 
 import { Login as T1 } from "@/templates/template-1";
 import { Login as T2 } from "@/templates/template-2";
@@ -111,14 +112,32 @@ function GridCard({ template, onViewCode }: GridCardProps) {
           </a>
         </div>
 
-        <button
-          type="button"
-          onClick={() => onViewCode(template.id)}
-          aria-haspopup="dialog"
-          className="mt-3 w-full flex items-center justify-center gap-2 bg-neutral-800 border border-neutral-700 text-white text-sm font-semibold py-2.5 rounded-lg hover:bg-neutral-700 transition-colors"
-        >
-          <CodeIcon size={16} /> View Code
-        </button>
+        <div className="mt-3 grid grid-cols-2 gap-3">
+          <button
+            type="button"
+            onClick={() => onViewCode(template.id)}
+            aria-haspopup="dialog"
+            className="flex items-center justify-center gap-2 bg-neutral-800 border border-neutral-700 text-white text-sm font-semibold py-2.5 rounded-lg hover:bg-neutral-700 transition-colors"
+          >
+            <CodeIcon size={16} /> View Code
+          </button>
+          {isBrandable(template.id) ? (
+            <Link
+              href={`/customize/${template.id}`}
+              className="flex items-center justify-center gap-2 bg-neutral-800 border border-indigo-500/40 text-white text-sm font-semibold py-2.5 rounded-lg hover:bg-neutral-700 transition-colors"
+            >
+              <Palette size={16} /> Customize
+            </Link>
+          ) : (
+            <span
+              aria-disabled="true"
+              title="Customization is coming to this template"
+              className="flex items-center justify-center gap-2 bg-neutral-900 border border-neutral-800 text-neutral-500 text-sm font-semibold py-2.5 rounded-lg cursor-not-allowed"
+            >
+              <Palette size={16} /> Soon
+            </span>
+          )}
+        </div>
       </div>
     </div>
   );

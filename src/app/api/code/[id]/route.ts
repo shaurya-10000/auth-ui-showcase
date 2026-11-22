@@ -1,13 +1,12 @@
 import { NextResponse } from "next/server";
-import { getTemplateFiles, getTemplateIds, isTemplateId } from "@/lib/template-source";
+import { applyBrandToFiles } from "@/lib/brand/apply";
+import { getTemplateFiles, isTemplateId } from "@/lib/template-source";
+
+export const dynamic = "force-dynamic";
 
 type RouteContext = { params: Promise<{ id: string }> };
 
-export function generateStaticParams() {
-  return getTemplateIds().map((id) => ({ id }));
-}
-
-export async function GET(_request: Request, { params }: RouteContext) {
+export async function GET(request: Request, { params }: RouteContext) {
   const { id } = await params;
 
   if (!isTemplateId(id)) {
@@ -15,7 +14,8 @@ export async function GET(_request: Request, { params }: RouteContext) {
   }
 
   try {
-    const files = await getTemplateFiles(id);
+    const brandParam = new URL(request.url).searchParams.get("brand");
+    const files = applyBrandToFiles(id, await getTemplateFiles(id), brandParam);
     return NextResponse.json({ id, files });
   } catch {
     return NextResponse.json({ error: "Could not read template source" }, { status: 500 });

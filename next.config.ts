@@ -11,7 +11,11 @@ const nextConfig: NextConfig = {
   },
   devIndicators: {
     position: 'bottom-right',
-  }
+  },
+  // The code, download and install API routes read template source files at runtime.
+  outputFileTracingIncludes: {
+    "/api/**/*": ["./src/templates/**/*"],
+  },
 };
 
 export default nextConfig;
