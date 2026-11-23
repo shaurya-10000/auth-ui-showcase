@@ -21,7 +21,7 @@ export default function BrandMark({ brand, isDark }: BrandMarkProps) {
       ) : (
         <span
           aria-hidden="true"
-          className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-b from-[var(--brand-soft)] via-[var(--brand)] to-[var(--brand-strong)] text-sm font-bold text-white shadow-[0_3px_6px_rgba(0,0,0,0.35),inset_0_1px_0_rgba(255,255,255,0.45)]"
+          className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-b from-[var(--brand-soft)] via-[var(--brand)] to-[var(--brand-strong)] text-sm font-bold text-[color:var(--btn-text)] shadow-[0_3px_6px_rgba(0,0,0,0.35),inset_0_1px_0_rgba(255,255,255,0.45)]"
         >
           {brand.name.charAt(0).toUpperCase()}
         </span>
