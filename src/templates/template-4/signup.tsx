@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Sun, Moon } from "lucide-react";
 import { brand as defaultBrand, type Brand } from "./brand";
 import BrandMark from "./brand-mark";
+import FontLoader from "./font-loader";
 import { brandVars, themeClasses } from "./theme";
 
 interface SignupProps {
@@ -12,7 +13,8 @@ interface SignupProps {
 
 export default function Signup({ brand = defaultBrand }: SignupProps) {
   const [isLoading, setIsLoading] = useState(false);
-  const [isDark, setIsDark] = useState(true);
+  const [themeOverride, setThemeOverride] = useState<boolean | null>(null);
+  const isDark = themeOverride ?? brand.startDark;
   const theme = themeClasses(isDark);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -22,10 +24,11 @@ export default function Signup({ brand = defaultBrand }: SignupProps) {
   };
 
   return (
-    <div className={`min-h-screen flex items-center justify-center p-4 font-mono transition-colors duration-300 ${theme.page}`} style={brandVars(brand.accent, brand.accentLight)}>
+    <div className={`min-h-screen flex items-center justify-center p-4 transition-colors duration-300 ${theme.page}`} style={brandVars(brand, isDark)}>
+      <FontLoader family={brand.fontFamily} />
 
       {/* Floating Theme Toggle */}
-      <button onClick={() => setIsDark(!isDark)} className={theme.toggle} aria-label="Toggle theme">
+      <button onClick={() => setThemeOverride(!isDark)} className={theme.toggle} aria-label="Toggle theme">
         {isDark ? <Sun size={20} /> : <Moon size={20} />}
       </button>
 
@@ -44,23 +47,23 @@ export default function Signup({ brand = defaultBrand }: SignupProps) {
           <BrandMark brand={brand} isDark={isDark} />
 
           <div className="mb-8">
-            <h1 className="text-2xl font-bold uppercase tracking-widest">{brand.signupTitle}</h1>
+            <h1 className={theme.heading}>{brand.signupTitle}</h1>
             <p className={theme.subtitle}>{brand.signupSubtitle}</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-xs uppercase tracking-widest mb-2 opacity-80">Alias</label>
+              <label className={theme.fieldLabel}>Alias</label>
               <input type="text" required className={theme.input} placeholder="neo" />
             </div>
 
             <div>
-              <label className="block text-xs uppercase tracking-widest mb-2 opacity-80">Comm-Link (Email)</label>
+              <label className={theme.fieldLabel}>Comm-Link (Email)</label>
               <input type="email" required className={theme.input} placeholder="neo@matrix.net" />
             </div>
 
             <div>
-              <label className="block text-xs uppercase tracking-widest mb-2 opacity-80">Passphrase</label>
+              <label className={theme.fieldLabel}>Passphrase</label>
               <input type="password" required className={theme.input} placeholder="********" />
             </div>
 

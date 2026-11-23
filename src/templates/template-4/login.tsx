@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Sun, Moon } from "lucide-react";
 import { brand as defaultBrand, type Brand } from "./brand";
 import BrandMark from "./brand-mark";
+import FontLoader from "./font-loader";
 import { brandVars, themeClasses } from "./theme";
 
 interface LoginProps {
@@ -12,7 +13,8 @@ interface LoginProps {
 
 export default function Login({ brand = defaultBrand }: LoginProps) {
   const [isLoading, setIsLoading] = useState(false);
-  const [isDark, setIsDark] = useState(true);
+  const [themeOverride, setThemeOverride] = useState<boolean | null>(null);
+  const isDark = themeOverride ?? brand.startDark;
   const theme = themeClasses(isDark);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -22,10 +24,11 @@ export default function Login({ brand = defaultBrand }: LoginProps) {
   };
 
   return (
-    <div className={`min-h-screen flex items-center justify-center p-4 font-mono transition-colors duration-300 ${theme.page}`} style={brandVars(brand.accent, brand.accentLight)}>
+    <div className={`min-h-screen flex items-center justify-center p-4 transition-colors duration-300 ${theme.page}`} style={brandVars(brand, isDark)}>
+      <FontLoader family={brand.fontFamily} />
 
       {/* Floating Theme Toggle */}
-      <button onClick={() => setIsDark(!isDark)} className={theme.toggle} aria-label="Toggle theme">
+      <button onClick={() => setThemeOverride(!isDark)} className={theme.toggle} aria-label="Toggle theme">
         {isDark ? <Sun size={20} /> : <Moon size={20} />}
       </button>
 
@@ -45,18 +48,18 @@ export default function Login({ brand = defaultBrand }: LoginProps) {
           <BrandMark brand={brand} isDark={isDark} />
 
           <div className="mb-8">
-            <h1 className="text-2xl font-bold uppercase tracking-widest">{brand.loginTitle}</h1>
+            <h1 className={theme.heading}>{brand.loginTitle}</h1>
             <p className={theme.subtitle}>{brand.loginSubtitle}</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block text-xs uppercase tracking-widest mb-2 opacity-80">User ID</label>
+              <label className={theme.fieldLabel}>User ID</label>
               <input type="email" required className={theme.input} placeholder="root@localhost" />
             </div>
 
             <div>
-              <label className="block text-xs uppercase tracking-widest mb-2 opacity-80">Passphrase</label>
+              <label className={theme.fieldLabel}>Passphrase</label>
               <input type="password" required className={theme.input} placeholder="********" />
             </div>
 
