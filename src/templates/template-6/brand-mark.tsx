@@ -25,7 +25,7 @@ export default function BrandMark({ brand, isDark, forceLight = false }: BrandMa
         <span
           aria-hidden="true"
           className={`flex h-11 w-11 items-center justify-center rounded-xl text-xl font-bold ${
-            useDarkBadge ? "bg-white text-black" : "bg-[var(--brand)] text-white"
+            useDarkBadge ? "bg-white text-black" : "bg-[var(--brand)] text-[color:var(--btn-text)]"
           }`}
         >
           {brand.name.charAt(0).toUpperCase()}
