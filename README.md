@@ -6,12 +6,7 @@
 
 [![Live Demo](https://img.shields.io/badge/Live_Demo-Visit-success?style=for-the-badge&logo=vercel&logoColor=white)](https://auth-ui-showcase-rho.vercel.app)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](./LICENSE)
-[![Last commit](https://img.shields.io/github/last-commit/shaurya-10000/auth-ui-showcase?style=for-the-badge)](https://github.com/shaurya-10000/auth-ui-showcase/commits/main)
-
-[![Next.js](https://img.shields.io/badge/Next.js-16-000000?style=flat-square&logo=nextdotjs&logoColor=white)](https://nextjs.org)
-[![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev)
-[![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![CI](https://img.shields.io/github/actions/workflow/status/shaurya-10000/auth-ui-showcase/ci.yml?branch=main&label=CI&style=for-the-badge&logo=githubactions&logoColor=white)](https://github.com/shaurya-10000/auth-ui-showcase/actions/workflows/ci.yml)
 
 <!-- TODO: take a fresh screenshot of the carousel (Win+Shift+S), save it as docs/assets/hero.png, then delete these two comment lines and the comment markers around the image below.
 <img src="docs/assets/hero.png" alt="AuthShowcase carousel previewing the Minimal SaaS login template" width="880" />
@@ -28,9 +23,9 @@
 |  |  |
 | :--- | :--- |
 | **What** | A gallery of 16 authentication UI designs. Each template ships a login page and a sign-up page, previewed live in a carousel or a grid. |
-| **New: branding** | Open **Customize** on a template to change its text, logo and colors with a live preview. The zip, the code viewer and the install commands all include your changes. |
+| **Customize** | Open **Customize** on any template to change its text, logo, fonts, sizes and colors with a live preview. Your design is saved in your browser, and the zip, the code viewer and the install commands all include your changes. |
 | **Why it's interesting** | Previews are the real components, rendered at 1440x810 and scaled to fit, not screenshots. One template folder powers the preview, the zip, the in-browser code viewer and the installer scripts, so there is a single source of truth. |
-| **Stack** | Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS 4 · lucide-react · JSZip |
+| **Stack** | [![Next.js](https://img.shields.io/badge/Next.js-16_App_Router-000000?style=flat-square&logo=nextdotjs&logoColor=white)](https://nextjs.org) [![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev) [![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org) [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com) [![Node.js](https://img.shields.io/badge/Node.js-20%2B-5FA04E?style=flat-square&logo=nodedotjs&logoColor=white)](https://nodejs.org) [![Lucide](https://img.shields.io/badge/Lucide-icons-F56565?style=flat-square&logo=lucide&logoColor=white)](https://lucide.dev) [![JSZip](https://img.shields.io/badge/JSZip-3-F7DF1E?style=flat-square&logo=javascript&logoColor=black)](https://stuk.github.io/jszip/) [![ESLint](https://img.shields.io/badge/ESLint-9-4B32C3?style=flat-square&logo=eslint&logoColor=white)](https://eslint.org) [![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-CI-2088FF?style=flat-square&logo=githubactions&logoColor=white)](https://github.com/features/actions) [![Vercel](https://img.shields.io/badge/Vercel-hosting-000000?style=flat-square&logo=vercel&logoColor=white)](https://vercel.com) |
 
 ## Contents
 
@@ -60,7 +55,7 @@
 
 - **Live carousel.** Every slide is a working login component scaled into a preview box. Navigate with the arrow buttons, or swipe on touch devices.
 - **Grid view.** See all 16 templates at once at `/grid`. Each card has Preview, Code, View Code and Customize buttons.
-- **Customize.** Edit the brand name, logo, colors, titles, button labels, side-panel copy, optional sections and legal links at `/customize/<template>`. The preview updates as you type, and the result is shareable as a link.
+- **Customize every template.** Edit the brand name, logo, fonts, text sizes, colors (light and dark), corner radius, titles, button labels, side-panel copy and design, optional sections and legal links at `/customize/<template>`. The preview updates as you type, the result is shareable as a link, and your latest design is saved in your browser.
 - **Customized exports.** Download, View Code and the install commands all use your customized values, so what you see in the code viewer is exactly what you download or install.
 - **Login and sign-up pages.** Every template has both, reachable at `/login/<id>` and `/signup/<id>`, with a back button that returns to the gallery and a day/night toggle.
 - **View Code sidebar.** A drawer with **Source files** (every file of the template with line numbers and a copy button) and **Run locally** (the install commands). Available from the carousel, the grid and the customize page.
@@ -72,7 +67,7 @@
 | :--- | :--- |
 | **Carousel** | Live scaled previews, arrows, touch swipe, progress dots |
 | **Grid view** | All templates in a responsive 1 / 2 / 3 column grid |
-| **Customize page** | Form plus live preview, login and sign-up switch, reset, copy link, download, view code |
+| **Customize page** | Form plus live preview, login and sign-up switch, per-field reset, copy link, download, view code, designs saved in your browser |
 | **Template pages** | Login and sign-up for each design, with a back button |
 | **Code viewer** | Files, line numbers, copy per file, loaded on demand |
 | **Installers** | Generated PowerShell and bash scripts per template |
@@ -87,6 +82,7 @@ Open **Customize** on a carousel slide or a grid card, or go straight to `/custo
 1. **Edit** the fields on the left. The preview updates live, and you can switch between the login and sign-up pages.
 2. **Share** your design with **Copy link**. The changes are encoded in the URL, so the link opens the same design.
 3. **Get the code** with **Download** (zip) or **View Code** (browse the files and copy the install commands).
+4. **Come back later.** Your latest design for each template is saved in this browser (localStorage). A shared link always takes priority over a saved design, and **Reset** clears it.
 
 ### What you can change
 
@@ -99,14 +95,16 @@ Open **Customize** on a carousel slide or a grid card, or go straight to `/custo
 | **Side panel** | Headline and text for login and sign-up, trust line |
 | **Options** | Google and GitHub buttons on or off, Remember me on or off |
 | **Links** | Terms URL, Privacy URL |
-| **Typography** | Font family (Google Fonts), heading weight, body, heading and headline sizes (template-1 so far) |
-| **Styling** | Light and dark theme colors, button text color, corner radius, side panel gradient and text colors (template-1 so far) |
+| **Typography** | Font family (Google Fonts), heading weight, body text, form title and side-panel headline and text sizes |
+| **Theme colors** | Light and dark theme colors (background, headings, text, input border and text) and the starting mode |
+| **Buttons and inputs** | Button text color, button and input corner radius |
+| **Side panel design** | Gradient start, middle and end colors (empty follows the accent), headline and text colors |
 
 Each template exposes only the fields that make sense for its design, so the form differs per template. Leave the brand name and logo empty to hide the brand mark.
 
 ### Where customization is available
 
-Customization is live for the templates marked in the [table below](#templates). Templates without it show a disabled **Customize (soon)** button.
+Every template can be customized. Each one exposes only the controls that fit its design, so the form differs per template (for example, a dark-only design has no light theme colors).
 
 ### How it works
 
@@ -131,6 +129,8 @@ export type Brand = typeof brand;
 - **Live preview.** The Customize page passes your edited values to the template as a `brand` prop.
 - **Exports.** The zip, the code viewer and the installer scripts read the template's real files and replace only `brand.ts` with one built from your values. Nothing else is rewritten, so the code you receive stays clean and readable.
 - **Colors.** The accent color becomes CSS variables on the page root (`--brand` and tints derived with `color-mix`), and the Tailwind classes read them, for example `bg-[var(--brand)]`.
+- **Fonts, sizes and radii.** Typography, theme colors, sizes and corner radii become CSS variables in the same way, for example `text-[length:var(--heading-size)]`. A chosen Google Font is loaded by a small `font-loader.tsx` file inside the template folder, so exported code works on its own.
+- **Saving.** The Customize page keeps the same encoded value in localStorage under `authshowcase:brand:<template>`. Nothing is sent to a server.
 - **Sharing.** Only the values that differ from the defaults are encoded as base64url JSON in the `?brand=` URL parameter.
 
 ---
@@ -143,18 +143,18 @@ export type Brand = typeof brand;
 | `template-2` | **Glassmorphism** | Frosted glass effects with vibrant background blurs and subtle borders. | Trendy, Dark Mode, Visual | Yes |
 | `template-3` | **Neo-Brutalist** | High contrast, thick borders, and aggressive layouts for a bold impression. | Bold, High Contrast, Experimental | Yes |
 | `template-4` | **Cyberpunk Terminal** | A raw, neon-accented terminal interface for the modern hacker. | Cyberpunk, Terminal, Dark Mode | Yes |
-| `template-5` | **Neumorphism** | Soft, extruded UI elements with subtle shadows and a clean, tactile feel. | Soft UI, Light Mode, Tactile | Soon |
-| `template-6` | **Bento Grid** | A modern, card-based layout with large rounded corners and a clean aesthetic. | Modern, Card UI, Minimal | Soon |
-| `template-7` | **Brutalist Pastel** | Playful pastel colors mixed with heavy, chunky black borders. | Retro, Playful, Bold | Soon |
-| `template-8` | **Skeuomorphism** | Realistic, tactile UI elements with gradients and deep shadows. | 3D, Classic, Realistic | Soon |
-| `template-9` | **Editorial Serif** | Refined magazine-inspired typography with warm paper tones and subtle hairlines. | Editorial, Serif, Minimal | Soon |
-| `template-10` | **Aurora Mesh** | Luminous multi-hue mesh gradients paired with translucent surfaces and crisp contrast. | Gradient, Mesh, Modern | Soon |
-| `template-11` | **Swiss Grid** | Strict modular grid lines, bold international typography, and crisp Swiss red accents. | Swiss, Grid, Minimal | Soon |
-| `template-12` | **Midnight Split** | High-contrast split layout pairing an editorial dark panel with warm amber accents. | Split Layout, Dark Mode, B2B | Soon |
-| `template-13` | **Nordic Frost** | Cool slate-blue surfaces, soft rounded cards, and calm Scandinavian contrast. | Nordic, Frost, Calm UI | Soon |
-| `template-14` | **Warm Terracotta** | Earthy clay surfaces, soft warmth, and inviting contrast for creative tools. | Terracotta, Warm UI, Creative | Soon |
-| `template-15` | **Botanical Olive** | Grounded sage and olive greens paired with soft organic surfaces. | Botanical, Organic, Calm UI | Soon |
-| `template-16` | **Royal Indigo** | Rich midnight-indigo surfaces paired with luminous violet-blue accents and crisp contrast. | Indigo, Enterprise, Modern | Soon |
+| `template-5` | **Neumorphism** | Soft, extruded UI elements with subtle shadows and a clean, tactile feel. | Soft UI, Light Mode, Tactile | Yes |
+| `template-6` | **Bento Grid** | A modern, card-based layout with large rounded corners and a clean aesthetic. | Modern, Card UI, Minimal | Yes |
+| `template-7` | **Brutalist Pastel** | Playful pastel colors mixed with heavy, chunky black borders. | Retro, Playful, Bold | Yes |
+| `template-8` | **Skeuomorphism** | Realistic, tactile UI elements with gradients and deep shadows. | 3D, Classic, Realistic | Yes |
+| `template-9` | **Editorial Serif** | Refined magazine-inspired typography with warm paper tones and subtle hairlines. | Editorial, Serif, Minimal | Yes |
+| `template-10` | **Aurora Mesh** | Luminous multi-hue mesh gradients paired with translucent surfaces and crisp contrast. | Gradient, Mesh, Modern | Yes |
+| `template-11` | **Swiss Grid** | Strict modular grid lines, bold international typography, and crisp Swiss red accents. | Swiss, Grid, Minimal | Yes |
+| `template-12` | **Midnight Split** | High-contrast split layout pairing an editorial dark panel with warm amber accents. | Split Layout, Dark Mode, B2B | Yes |
+| `template-13` | **Nordic Frost** | Cool slate-blue surfaces, soft rounded cards, and calm Scandinavian contrast. | Nordic, Frost, Calm UI | Yes |
+| `template-14` | **Warm Terracotta** | Earthy clay surfaces, soft warmth, and inviting contrast for creative tools. | Terracotta, Warm UI, Creative | Yes |
+| `template-15` | **Botanical Olive** | Grounded sage and olive greens paired with soft organic surfaces. | Botanical, Organic, Calm UI | Yes |
+| `template-16` | **Royal Indigo** | Rich midnight-indigo surfaces paired with luminous violet-blue accents and crisp contrast. | Indigo, Enterprise, Modern | Yes |
 
 <!-- TODO: add screenshots to docs/assets/ and uncomment this gallery.
 
@@ -242,6 +242,7 @@ Grid (/grid) --+
 | **Brand values in a `brand.ts` file** | Exports stay readable and easy to edit by hand | Each template has to be refactored once to read from it |
 | **CSS variables for accent colors** | Any hex color works, with tints derived by `color-mix` | Tints are computed, so they can differ slightly from fixed Tailwind shades |
 | **Customizations in the URL (`?brand=`)** | No backend or account needed, and links are shareable | Very large customizations are limited by URL length |
+| **Saving in localStorage** | A returning visitor gets their last design back with no account, and a shared link still wins over it | Saved designs stay on one browser and one device |
 | **Templates only import from their own folder** | The zip and installers only need to copy that folder | Shared helpers are duplicated per template |
 | **Installer scripts embed the files** | One request, nothing to host, and the script can be read before running | Scripts grow with the template size |
 | **Touch swipe on the page wrapper, not the preview** | Gesture works anywhere on the slide without fighting button taps | Mouse drag is not supported; desktop uses the arrows |
@@ -337,7 +338,7 @@ src/
     install-script/               Builds the PowerShell and bash installers
   templates/
     template-1 ... template-16/   index.ts, login.tsx, signup.tsx per template
-                                  customizable ones also have brand.ts, theme.ts, brand-mark.tsx
+                                  every template also has brand.ts, theme.ts, brand-mark.tsx, font-loader.tsx
 public/                           Static assets and icons
 .github/workflows/                CI workflow
 ```
@@ -358,12 +359,12 @@ The View Code sidebar, `/api/code`, `/api/download` and the installer scripts re
 
 ## Making a template customizable
 
-A template becomes customizable by following the same pattern as templates 1 to 4:
+A template becomes customizable by following the pattern used in every template (template-1 is the reference):
 
-1. **`brand.ts`** exports a flat `brand` object of strings and booleans, plus `export type Brand = typeof brand;`. The defaults must reproduce the template's current text and accent color exactly. Keys must exist in `src/lib/brand/fields.ts`, which defines each key's label, input type and form group.
-2. **`theme.ts`** exports `brandVars(...)`, which turns the accent color(s) into CSS variables, and `themeClasses(...)`, which returns class strings that read those variables.
+1. **`brand.ts`** exports a flat `brand` object of strings and booleans, plus `export type Brand = typeof brand;`. The defaults must reproduce the template's current text, colors, sizes and font exactly. Keys must exist in `src/lib/brand/fields.ts`, which defines each key's label, input type and form group.
+2. **`theme.ts`** exports `brandVars(...)`, which turns the accent color(s), fonts, sizes, theme colors and radii into CSS variables, and `themeClasses(...)`, which returns class strings that read those variables.
 3. **`brand-mark.tsx`** renders the optional logo and brand name, and returns nothing when both are empty.
-4. **`login.tsx` and `signup.tsx`** accept an optional `brand` prop that defaults to the imported `brand`, apply `brandVars` to the root element, and read all customizable text from `brand`. Optional sections are hidden when their toggle is off.
+4. **`login.tsx` and `signup.tsx`** accept an optional `brand` prop that defaults to the imported `brand`, apply `brandVars` to the root element, and read all customizable text from `brand`. Optional sections are hidden when their toggle is off. They also render `<FontLoader family={brand.fontFamily} />` so a chosen Google Font loads.
 5. **Register it** in `src/lib/brand/defaults.ts` and `src/lib/brand/registry.ts`. The **Customize** buttons turn on automatically.
 
 Templates must only import from their own folder and from `react`, `next` and `lucide-react`, because the zip and the installer scripts copy only that folder.
@@ -399,7 +400,7 @@ The API routes read files from `src/templates` at runtime, so `next.config.ts` i
 ## Security notes
 
 - **Template ids are allowlisted.** Every route checks the id against `src/config/templates.ts` before touching the filesystem, so a crafted id cannot read other files.
-- **Brand values are validated.** Unknown keys are ignored. Colors must be six-digit hex. URLs must be `http(s)`, site-relative or `#`, which rejects `javascript:` and `data:` links. Text is stripped of control characters and length-limited (120 characters for text, 320 for text areas, 500 for URLs). The `brand` parameter is capped at 8,000 characters.
+- **Brand values are validated.** Unknown keys are ignored. Colors must be six-digit hex, font choices must be on the allowed list and numbers are clamped to their range. URLs must be `http(s)`, site-relative or `#`, which rejects `javascript:` and `data:` links. Text is stripped of control characters and length-limited (120 characters for text, 320 for text areas, 500 for URLs). The `brand` parameter is capped at 8,000 characters.
 - **Read-only.** The API routes only read template files and return text, JSON or a zip. Nothing is written on the server.
 - **Installers are transparent.** Scripts embed plain file contents with no variable expansion (here-strings in PowerShell, quoted heredocs in bash), and can be opened in a browser before you run them.
 - **No secrets.** The project has no environment variables, keys or user data.
@@ -417,10 +418,12 @@ The API routes read files from `src/templates` at runtime, so `next.config.ts` i
 | Installer says Node.js 20 is required | Older Node version | Install Node 20 or newer from [nodejs.org](https://nodejs.org) |
 | Avatars or remote images do not load | The host is missing from `next.config.ts` `images.remotePatterns` | Add the host. The installer does this automatically for new projects |
 | Swipe does nothing on desktop | Swipe uses touch events | Use the arrows, or Chrome DevTools device mode (`Ctrl+Shift+M`) |
+| The chosen font does not show | Fonts load from Google Fonts, which an ad blocker, a firewall or being offline can block | Allow `fonts.googleapis.com`, or pick Default |
 
 ## Known limitations
 
-- **Customization is rolling out.** Only the templates marked "Yes" in the table are customizable so far.
+- **Controls differ per template.** Each design exposes only the options that fit it, so not every template has every typography, theme or panel control.
+- **Fonts need a network.** A custom font loads from Google Fonts. With the default font nothing is requested.
 - **Logo by URL only.** There is no image upload yet, so a logo must be a link to a hosted image.
 - **Designs are saved per browser only.** Customizations live in the page URL, and the Customize page also keeps your latest design for each template in this browser (localStorage). There are no accounts or cloud-saved projects yet.
 - **Installers include only the template folder.** If a template depends on shared components or global CSS, copy those separately.
@@ -430,14 +433,15 @@ The API routes read files from `src/templates` at runtime, so `next.config.ts` i
 
 ## Roadmap
 
-- [ ] Customization for all 16 templates
+- [x] Customization for all 16 templates
 - [ ] Logo upload
-- [ ] Accounts and saved designs
+- [ ] Accounts and cloud-saved designs
 - [ ] Syntax highlighting in the code viewer
 - [ ] Keyboard arrow navigation for the carousel
 - [ ] "Copy all files" in the sidebar
 - [ ] More templates
-- [ ] Automated tests and a CI check for typecheck, lint and build on every PR
+- [x] CI workflow on GitHub Actions
+- [ ] Automated tests
 - [ ] A one-command CLI (for example via `npx`) as an alternative to the scripts
 
 ## Contributing
