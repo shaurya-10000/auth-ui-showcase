@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Sun, Moon } from "lucide-react";
 import { brand as defaultBrand, type Brand } from "./brand";
 import BrandMark from "./brand-mark";
+import FontLoader from "./font-loader";
 import { brandVars, themeClasses } from "./theme";
 
 interface SignupProps {
@@ -13,7 +14,9 @@ interface SignupProps {
 export default function Signup({ brand = defaultBrand }: SignupProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [isDark, setIsDark] = useState(false);
-  const theme = themeClasses(isDark);
+  const [themeOverride, setThemeOverride] = useState<boolean | null>(null);
+  const effectiveDark = themeOverride ?? brand.startDark ?? isDark;
+  const theme = themeClasses(effectiveDark);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,19 +25,24 @@ export default function Signup({ brand = defaultBrand }: SignupProps) {
   };
 
   return (
-    <div className={`${theme.page} py-12`} style={brandVars(brand.accent)}>
+    <div className={`${theme.page} py-12`} style={brandVars(brand, effectiveDark)}>
+      <FontLoader family={brand.fontFamily} />
 
       {/* Theme Toggle */}
       <button
-        onClick={() => setIsDark(!isDark)}
+        onClick={() => {
+          const next = !effectiveDark;
+          setIsDark(next);
+          setThemeOverride(next);
+        }}
         className={theme.toggle}
         aria-label="Toggle theme"
       >
-        {isDark ? <Sun size={20} /> : <Moon size={20} />}
+        {effectiveDark ? <Sun size={20} /> : <Moon size={20} />}
       </button>
 
       <div className={theme.card}>
-        <BrandMark brand={brand} isDark={isDark} />
+        <BrandMark brand={brand} isDark={effectiveDark} />
 
         <div className="mb-6">
           <span
