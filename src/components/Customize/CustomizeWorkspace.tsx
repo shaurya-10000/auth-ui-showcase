@@ -26,7 +26,11 @@ export function CustomizeWorkspace({
 }: CustomizeWorkspaceProps) {
   const [view, setView] = useState<PreviewView>("login");
   const [isCodeOpen, setIsCodeOpen] = useState(false);
-  const { draft, values, brandParam, setField, reset, isModified } = useBrandState(defaults, initialValues);
+  const { draft, values, brandParam, setField, reset, isModified } = useBrandState(
+    templateId,
+    defaults,
+    initialValues,
+  );
   const closeCode = useCallback(() => setIsCodeOpen(false), []);
 
   const pages = brandablePages[templateId];
@@ -60,8 +64,11 @@ export function CustomizeWorkspace({
             <div>
               <h1 className="text-lg font-semibold">Customize {templateName}</h1>
               <p className="mt-1 text-sm text-neutral-400">
-                Edit the text, colors and links. The preview, download, code and install commands all
-                follow your changes.
+                Edit the text, fonts, colors and links. The preview, download, code and install commands
+                all follow your changes.
+              </p>
+              <p className="mt-2 text-xs text-neutral-500">
+                Your latest design is saved in this browser, so it is still here next time.
               </p>
             </div>
             <BrandForm defaults={defaults} draft={draft} onChange={setField} />

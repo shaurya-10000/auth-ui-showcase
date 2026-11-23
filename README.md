@@ -99,6 +99,8 @@ Open **Customize** on a carousel slide or a grid card, or go straight to `/custo
 | **Side panel** | Headline and text for login and sign-up, trust line |
 | **Options** | Google and GitHub buttons on or off, Remember me on or off |
 | **Links** | Terms URL, Privacy URL |
+| **Typography** | Font family (Google Fonts), heading weight, body, heading and headline sizes (template-1 so far) |
+| **Styling** | Light and dark theme colors, button text color, corner radius, side panel gradient and text colors (template-1 so far) |
 
 Each template exposes only the fields that make sense for its design, so the form differs per template. Leave the brand name and logo empty to hide the brand mark.
 
@@ -420,7 +422,7 @@ The API routes read files from `src/templates` at runtime, so `next.config.ts` i
 
 - **Customization is rolling out.** Only the templates marked "Yes" in the table are customizable so far.
 - **Logo by URL only.** There is no image upload yet, so a logo must be a link to a hosted image.
-- **Designs are not saved.** Customizations live in the page URL. There are no accounts or saved projects yet.
+- **Designs are saved per browser only.** Customizations live in the page URL, and the Customize page also keeps your latest design for each template in this browser (localStorage). There are no accounts or cloud-saved projects yet.
 - **Installers include only the template folder.** If a template depends on shared components or global CSS, copy those separately.
 - **Plain-text code viewer.** The sidebar shows line numbers and copy, but no syntax highlighting yet.
 - **Grid renders every preview.** All live previews mount at once, which is heavier than static images.

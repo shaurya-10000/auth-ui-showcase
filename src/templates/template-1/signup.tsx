@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Eye, EyeOff, ArrowRight, Sun, Moon } from "lucide-react";
 import { brand as defaultBrand, type Brand } from "./brand";
 import BrandMark from "./brand-mark";
+import FontLoader from "./font-loader";
 import { brandVars, themeClasses } from "./theme";
 
 interface SignupProps {
@@ -13,7 +14,8 @@ interface SignupProps {
 export default function Signup({ brand = defaultBrand }: SignupProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isDark, setIsDark] = useState(false);
+  const [themeOverride, setThemeOverride] = useState<boolean | null>(null);
+  const isDark = themeOverride ?? brand.startDark;
   const theme = themeClasses(isDark);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -23,21 +25,22 @@ export default function Signup({ brand = defaultBrand }: SignupProps) {
   };
 
   return (
-    <div className="min-h-screen flex font-sans transition-colors duration-300" style={brandVars(brand.accent)}>
+    <div className="min-h-screen flex font-sans transition-colors duration-300" style={brandVars(brand, isDark)}>
+      <FontLoader family={brand.fontFamily} />
 
       {/* Floating Theme Toggle - Extreme Right */}
-      <button onClick={() => setIsDark(!isDark)} className={theme.toggle} aria-label="Toggle theme">
+      <button onClick={() => setThemeOverride(!isDark)} className={theme.toggle} aria-label="Toggle theme">
         {isDark ? <Sun size={20} /> : <Moon size={20} />}
       </button>
 
       {/* Left Side - Form */}
       <div className={`flex-1 flex flex-col justify-center px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24 w-full lg:w-1/2 transition-colors duration-300 ${theme.panel}`}>
         <div className="mx-auto w-full max-w-sm lg:w-96">
-          <BrandMark brand={brand} isDark={isDark} />
+          <BrandMark brand={brand} />
 
           <div className="mb-10">
-            <h2 className={`text-3xl font-bold tracking-tight ${theme.heading}`}>{brand.signupTitle}</h2>
-            <p className={`mt-2 text-sm ${theme.muted}`}>
+            <h2 className={theme.title}>{brand.signupTitle}</h2>
+            <p className={`mt-2 ${theme.text} ${theme.muted}`}>
               {brand.signinPrompt}{" "}
               <Link href="/login/template-1" className={`font-semibold ${theme.link}`}>
                 {brand.signinLink}
@@ -68,7 +71,7 @@ export default function Signup({ brand = defaultBrand }: SignupProps) {
               <div className="flex h-6 items-center">
                 <input id="terms" name="terms" type="checkbox" required className={theme.checkbox} />
               </div>
-              <div className="ml-3 text-sm leading-6">
+              <div className={`ml-3 ${theme.text} leading-6`}>
                 <label htmlFor="terms" className={`font-medium ${theme.checkboxLabel}`}>
                   I agree to the <a href={brand.termsUrl || "#"} className={theme.link}>Terms</a> and <a href={brand.privacyUrl || "#"} className={theme.link}>Privacy Policy</a>
                 </label>
@@ -95,10 +98,10 @@ export default function Signup({ brand = defaultBrand }: SignupProps) {
       {/* Right Side - Image */}
       <div className="relative hidden w-0 flex-1 lg:block">
         <div className={`absolute inset-0 h-full w-full overflow-hidden ${theme.visual}`}>
-          <div className={`absolute inset-0 bg-gradient-to-tr from-[var(--brand-deep)] via-slate-900 to-[var(--brand-deep-alt)] opacity-80 transition-opacity duration-300 ${theme.gradientOpacity}`} />
-          <div className="absolute inset-0 flex flex-col justify-center px-16 text-white z-10">
-            <h1 className="text-5xl font-extrabold tracking-tight mb-6 leading-tight whitespace-pre-line">{brand.signupHeadline}</h1>
-            <p className="text-lg text-slate-300 max-w-md">{brand.signupSubheadline}</p>
+          <div className={`absolute inset-0 bg-gradient-to-tr from-[var(--panel-from)] via-[var(--panel-via)] to-[var(--panel-to)] opacity-80 transition-opacity duration-300 ${theme.gradientOpacity}`} />
+          <div className="absolute inset-0 flex flex-col justify-center px-16 z-10 text-[color:var(--panel-text)]">
+            <h1 className="mb-6 whitespace-pre-line font-extrabold leading-tight tracking-tight text-[length:var(--hero-size)]">{brand.signupHeadline}</h1>
+            <p className="max-w-md text-[length:var(--hero-text-size)] text-[color:var(--panel-muted)]">{brand.signupSubheadline}</p>
           </div>
         </div>
       </div>

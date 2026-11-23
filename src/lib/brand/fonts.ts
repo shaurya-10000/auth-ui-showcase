@@ -1,0 +1,21 @@
+/** Google Fonts offered in the Customize form. Every family here supports weights 400 to 700. */
+export const FONT_FAMILIES = [
+  "Default",
+  "Inter",
+  "Poppins",
+  "Roboto",
+  "DM Sans",
+  "Manrope",
+  "Outfit",
+  "Plus Jakarta Sans",
+  "Space Grotesk",
+  "Sora",
+  "Montserrat",
+  "Nunito",
+  "Work Sans",
+  "Lora",
+  "Merriweather",
+  "Playfair Display",
+  "JetBrains Mono",
+  "Fira Code",
+] as const;

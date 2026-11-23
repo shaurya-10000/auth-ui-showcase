@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Eye, EyeOff, ArrowRight, Sun, Moon } from "lucide-react";
 import { brand as defaultBrand, type Brand } from "./brand";
 import BrandMark from "./brand-mark";
+import FontLoader from "./font-loader";
 import { brandVars, themeClasses } from "./theme";
 
 interface LoginProps {
@@ -14,7 +15,8 @@ interface LoginProps {
 export default function Login({ brand = defaultBrand }: LoginProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isDark, setIsDark] = useState(false);
+  const [themeOverride, setThemeOverride] = useState<boolean | null>(null);
+  const isDark = themeOverride ?? brand.startDark;
   const theme = themeClasses(isDark);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -24,21 +26,22 @@ export default function Login({ brand = defaultBrand }: LoginProps) {
   };
 
   return (
-    <div className="min-h-screen flex font-sans transition-colors duration-300" style={brandVars(brand.accent)}>
+    <div className="min-h-screen flex font-sans transition-colors duration-300" style={brandVars(brand, isDark)}>
+      <FontLoader family={brand.fontFamily} />
 
       {/* Floating Theme Toggle - Extreme Right */}
-      <button onClick={() => setIsDark(!isDark)} className={theme.toggle} aria-label="Toggle theme">
+      <button onClick={() => setThemeOverride(!isDark)} className={theme.toggle} aria-label="Toggle theme">
         {isDark ? <Sun size={20} /> : <Moon size={20} />}
       </button>
 
       {/* Left Side - Form */}
       <div className={`flex-1 flex flex-col justify-center px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24 w-full lg:w-1/2 transition-colors duration-300 ${theme.panel}`}>
         <div className="mx-auto w-full max-w-sm lg:w-96">
-          <BrandMark brand={brand} isDark={isDark} />
+          <BrandMark brand={brand} />
 
           <div className="mb-10">
-            <h2 className={`text-3xl font-bold tracking-tight ${theme.heading}`}>{brand.loginTitle}</h2>
-            <p className={`mt-2 text-sm ${theme.muted}`}>
+            <h2 className={theme.title}>{brand.loginTitle}</h2>
+            <p className={`mt-2 ${theme.text} ${theme.muted}`}>
               {brand.signupPrompt}{" "}
               <Link href="/signup/template-1" className={`font-semibold ${theme.link}`}>
                 {brand.signupLink}
@@ -64,12 +67,12 @@ export default function Login({ brand = defaultBrand }: LoginProps) {
               {brand.showRemember ? (
                 <div className="flex items-center">
                   <input id="remember-me" name="remember-me" type="checkbox" className={theme.checkbox} />
-                  <label htmlFor="remember-me" className={`ml-2 block text-sm ${theme.checkboxLabel}`}>Remember me</label>
+                  <label htmlFor="remember-me" className={`ml-2 block ${theme.text} ${theme.checkboxLabel}`}>Remember me</label>
                 </div>
               ) : (
                 <span />
               )}
-              <div className="text-sm">
+              <div className={theme.text}>
                 <a href="#" className={`font-semibold ${theme.link}`}>Forgot password?</a>
               </div>
             </div>
@@ -95,7 +98,7 @@ export default function Login({ brand = defaultBrand }: LoginProps) {
                 <div className="absolute inset-0 flex items-center">
                   <div className={`w-full border-t ${theme.divider}`} />
                 </div>
-                <div className="relative flex justify-center text-sm font-medium leading-6">
+                <div className={`relative flex justify-center ${theme.text} font-medium leading-6`}>
                   <span className={`px-6 ${theme.dividerText}`}>Or continue with</span>
                 </div>
               </div>
@@ -118,10 +121,10 @@ export default function Login({ brand = defaultBrand }: LoginProps) {
       {/* Right Side - Image */}
       <div className="relative hidden w-0 flex-1 lg:block">
         <div className={`absolute inset-0 h-full w-full overflow-hidden ${theme.visual}`}>
-          <div className={`absolute inset-0 bg-gradient-to-tr from-[var(--brand-deep)] via-slate-900 to-[var(--brand-deep-alt)] opacity-80 transition-opacity duration-300 ${theme.gradientOpacity}`} />
-          <div className="absolute inset-0 flex flex-col justify-center px-16 text-white z-10">
-            <h1 className="text-5xl font-extrabold tracking-tight mb-6 leading-tight whitespace-pre-line">{brand.headline}</h1>
-            <p className="text-lg text-slate-300 max-w-md">{brand.subheadline}</p>
+          <div className={`absolute inset-0 bg-gradient-to-tr from-[var(--panel-from)] via-[var(--panel-via)] to-[var(--panel-to)] opacity-80 transition-opacity duration-300 ${theme.gradientOpacity}`} />
+          <div className="absolute inset-0 flex flex-col justify-center px-16 z-10 text-[color:var(--panel-text)]">
+            <h1 className="mb-6 whitespace-pre-line font-extrabold leading-tight tracking-tight text-[length:var(--hero-size)]">{brand.headline}</h1>
+            <p className="max-w-md text-[length:var(--hero-text-size)] text-[color:var(--panel-muted)]">{brand.subheadline}</p>
             {brand.trustText && (
               <div className="mt-12 flex items-center gap-4">
                 <div className="flex -space-x-4">
@@ -129,7 +132,7 @@ export default function Login({ brand = defaultBrand }: LoginProps) {
                   <Image className="h-10 w-10 rounded-full border-2 border-slate-900 object-cover" src="https://i.pravatar.cc/100?img=2" alt="Avatar 2" width={40} height={40} />
                   <Image className="h-10 w-10 rounded-full border-2 border-slate-900 object-cover" src="https://i.pravatar.cc/100?img=3" alt="Avatar 3" width={40} height={40} />
                 </div>
-                <p className="text-sm font-medium text-slate-300">{brand.trustText}</p>
+                <p className="text-sm font-medium text-[color:var(--panel-muted)]">{brand.trustText}</p>
               </div>
             )}
           </div>
