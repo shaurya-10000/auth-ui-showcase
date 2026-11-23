@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Eye, EyeOff, ArrowRight, Sun, Moon } from "lucide-react";
 import { brand as defaultBrand, type Brand } from "./brand";
 import BrandMark from "./brand-mark";
+import FontLoader from "./font-loader";
 import { brandVars, themeClasses } from "./theme";
 
 interface SignupProps {
@@ -13,7 +14,8 @@ interface SignupProps {
 export default function Signup({ brand = defaultBrand }: SignupProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isDark, setIsDark] = useState(true);
+  const [themeOverride, setThemeOverride] = useState<boolean | null>(null);
+  const isDark = themeOverride ?? brand.startDark;
   const theme = themeClasses(isDark);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -23,10 +25,11 @@ export default function Signup({ brand = defaultBrand }: SignupProps) {
   };
 
   return (
-    <div className={`min-h-screen relative flex items-center justify-center overflow-hidden font-sans py-12 transition-colors duration-500 ${theme.page}`} style={brandVars(brand.accent)}>
+    <div className={`min-h-screen relative flex items-center justify-center overflow-hidden font-sans py-12 transition-colors duration-500 ${theme.page}`} style={brandVars(brand, isDark)}>
+      <FontLoader family={brand.fontFamily} />
 
       {/* Floating Theme Toggle - Extreme Right */}
-      <button onClick={() => setIsDark(!isDark)} className={theme.toggle} aria-label="Toggle theme">
+      <button onClick={() => setThemeOverride(!isDark)} className={theme.toggle} aria-label="Toggle theme">
         {isDark ? <Sun size={20} /> : <Moon size={20} />}
       </button>
 

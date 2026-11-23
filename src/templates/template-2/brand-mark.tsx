@@ -21,13 +21,13 @@ export default function BrandMark({ brand, isDark }: BrandMarkProps) {
       ) : (
         <span
           aria-hidden="true"
-          className="flex h-9 w-9 items-center justify-center rounded-xl bg-[var(--brand)] text-base font-bold text-white shadow-[0_0_20px_var(--brand-glow)]"
+          className="flex h-9 w-9 items-center justify-center rounded-[var(--radius-button)] bg-[var(--brand)] text-base font-bold text-[color:var(--btn-text)] shadow-[0_0_20px_var(--brand-glow)]"
         >
           {brand.name.charAt(0).toUpperCase()}
         </span>
       )}
       {brand.name && (
-        <span className={`text-lg font-semibold tracking-tight ${isDark ? "text-white" : "text-slate-800"}`}>
+        <span className={`text-lg font-semibold tracking-tight ${isDark ? "text-[color:var(--heading-color)]" : "text-[color:var(--heading-color)]"}`}>
           {brand.name}
         </span>
       )}

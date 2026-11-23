@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Eye, EyeOff, ArrowRight, Sun, Moon } from "lucide-react";
 import { brand as defaultBrand, type Brand } from "./brand";
 import BrandMark from "./brand-mark";
+import FontLoader from "./font-loader";
 import { brandVars, themeClasses } from "./theme";
 
 interface LoginProps {
@@ -13,7 +14,8 @@ interface LoginProps {
 export default function Login({ brand = defaultBrand }: LoginProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isDark, setIsDark] = useState(true); // Defaults to dark for Glassmorphism
+  const [themeOverride, setThemeOverride] = useState<boolean | null>(null);
+  const isDark = themeOverride ?? brand.startDark;
   const theme = themeClasses(isDark);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -23,10 +25,11 @@ export default function Login({ brand = defaultBrand }: LoginProps) {
   };
 
   return (
-    <div className={`min-h-screen relative flex items-center justify-center overflow-hidden font-sans transition-colors duration-500 ${theme.page}`} style={brandVars(brand.accent)}>
+    <div className={`min-h-screen relative flex items-center justify-center overflow-hidden font-sans transition-colors duration-500 ${theme.page}`} style={brandVars(brand, isDark)}>
+      <FontLoader family={brand.fontFamily} />
 
       {/* Floating Theme Toggle - Extreme Right */}
-      <button onClick={() => setIsDark(!isDark)} className={theme.toggle} aria-label="Toggle theme">
+      <button onClick={() => setThemeOverride(!isDark)} className={theme.toggle} aria-label="Toggle theme">
         {isDark ? <Sun size={20} /> : <Moon size={20} />}
       </button>
 
@@ -70,7 +73,7 @@ export default function Login({ brand = defaultBrand }: LoginProps) {
             </div>
           </div>
 
-          <div className="flex items-center justify-between text-sm">
+          <div className="flex items-center justify-between">
             {brand.showRemember ? (
               <label className="flex items-center gap-2 cursor-pointer">
                 <input type="checkbox" className={theme.checkbox} />
@@ -79,7 +82,7 @@ export default function Login({ brand = defaultBrand }: LoginProps) {
             ) : (
               <span />
             )}
-            <a href="#" className={theme.link}>Forgot password?</a>
+            <a href="#" className={`text-[length:var(--text-size)] ${theme.link}`}>Forgot password?</a>
           </div>
 
           <button type="submit" disabled={isLoading} className={`${theme.submitBase} ${theme.submitLogin}`}>
