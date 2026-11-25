@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Sun, Moon } from "lucide-react";
 import { brand as defaultBrand, type Brand } from "./brand";
 import BrandMark from "./brand-mark";
+import FontLoader from "./font-loader";
 import { brandVars, themeClasses } from "./theme";
 
 interface SignupProps {
@@ -12,7 +13,8 @@ interface SignupProps {
 
 export default function Signup({ brand = defaultBrand }: SignupProps) {
   const [isLoading, setIsLoading] = useState(false);
-  const [isDark, setIsDark] = useState(true);
+  const [themeOverride, setThemeOverride] = useState<boolean | null>(null);
+  const isDark = themeOverride ?? brand.startDark;
   const theme = themeClasses(isDark);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -22,9 +24,11 @@ export default function Signup({ brand = defaultBrand }: SignupProps) {
   };
 
   return (
-    <div className={theme.page} style={brandVars(brand.accent)}>
+    <div className={theme.page} style={brandVars(brand, isDark)}>
+      <FontLoader family={brand.fontFamily} />
+
       <button
-        onClick={() => setIsDark(!isDark)}
+        onClick={() => setThemeOverride(!isDark)}
         className={theme.toggle}
         aria-label="Toggle theme"
       >
