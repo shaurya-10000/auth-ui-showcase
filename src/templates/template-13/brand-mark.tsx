@@ -21,7 +21,7 @@ export default function BrandMark({ brand, isDark }: BrandMarkProps) {
       ) : (
         <span
           aria-hidden="true"
-          className="flex h-9 w-9 items-center justify-center rounded-2xl bg-[var(--brand)] text-sm font-semibold text-white shadow-sm"
+          className="flex h-9 w-9 items-center justify-center rounded-2xl bg-[var(--brand)] text-sm font-semibold text-[color:var(--btn-text)] shadow-sm"
         >
           {brand.name.charAt(0).toUpperCase()}
         </span>
